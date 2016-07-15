@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bysonline.github.io/"/>
-  <updated>2016-07-15T07:57:10.271Z</updated>
+  <updated>2016-07-15T08:40:57.826Z</updated>
   <id>http://bysonline.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://bysonline.github.io/2016/07/14/github%20+%20hexo%20%E6%90%AD%E5%BB%BA%20markdown%20%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/"/>
     <id>http://bysonline.github.io/2016/07/14/github + hexo 搭建 markdown 博客系统/</id>
     <published>2016-07-14T11:20:12.000Z</published>
-    <updated>2016-07-15T07:57:10.271Z</updated>
+    <updated>2016-07-15T08:40:57.826Z</updated>
     
     <content type="html">&lt;p&gt;为了更好的积累和保存学习笔记，需要满足以下要求：&lt;/p&gt;
 &lt;ol&gt;
@@ -53,6 +53,13 @@
 &lt;p&gt;从新启动后可看到效果。&lt;/p&gt;
 &lt;h2 id=&quot;第一篇博客&quot;&gt;&lt;a href=&quot;#第一篇博客&quot; class=&quot;headerlink&quot; title=&quot;第一篇博客&quot;&gt;&lt;/a&gt;第一篇博客&lt;/h2&gt;&lt;p&gt;现在可以开始写第一篇博客了，使用&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;hexo new helloworld&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;or&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hexo n helloworld&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;就创建了一篇新博客，存放在&lt;strong&gt;hexo/source/_posts/&lt;/strong&gt;下，刷新网页可看到效果。&lt;/p&gt;
+&lt;h2 id=&quot;部署到github&quot;&gt;&lt;a href=&quot;#部署到github&quot; class=&quot;headerlink&quot; title=&quot;部署到github&quot;&gt;&lt;/a&gt;部署到github&lt;/h2&gt;&lt;p&gt;使用github的好处除了进行远程备份之外，还能直接通过github网站访问博客，非常方便。&lt;/p&gt;
+&lt;h3 id=&quot;1-修改配置&quot;&gt;&lt;a href=&quot;#1-修改配置&quot; class=&quot;headerlink&quot; title=&quot;1. 修改配置&quot;&gt;&lt;/a&gt;1. 修改配置&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;vi hexo/_config.yml&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;url: http://bysonline.github.io&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;deploy:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  type: git&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  repository: git@github.com:bsyonline/bsyonline.github.io.git&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  branch: master&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;2-部署&quot;&gt;&lt;a href=&quot;#2-部署&quot; class=&quot;headerlink&quot; title=&quot;2. 部署&quot;&gt;&lt;/a&gt;2. 部署&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;hexo g&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hexo d&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;完成之后可以访问bsyonline.github.io看到效果。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注：github的仓库名字必须是xxx.github.io&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;至此，本地的hexo博客系统就搭建好了。&lt;/p&gt;
 </content>
     
