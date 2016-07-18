@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bysonline.github.io/"/>
-  <updated>2016-07-15T08:40:57.826Z</updated>
+  <updated>2016-07-18T09:34:46.238Z</updated>
   <id>http://bysonline.github.io/</id>
   
   <author>
@@ -16,94 +16,975 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>github + hexo 搭建 markdown 博客系统</title>
-    <link href="http://bysonline.github.io/2016/07/14/github%20+%20hexo%20%E6%90%AD%E5%BB%BA%20markdown%20%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://bysonline.github.io/2016/07/14/github + hexo 搭建 markdown 博客系统/</id>
-    <published>2016-07-14T11:20:12.000Z</published>
-    <updated>2016-07-15T08:40:57.826Z</updated>
+    <title>jade语法实践</title>
+    <link href="http://bysonline.github.io/2016/07/18/jade%E8%AF%AD%E6%B3%95%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://bysonline.github.io/2016/07/18/jade语法实践/</id>
+    <published>2016-07-18T06:29:39.000Z</published>
+    <updated>2016-07-18T09:34:46.238Z</updated>
     
-    <content type="html">&lt;p&gt;为了更好的积累和保存学习笔记，需要满足以下要求：&lt;/p&gt;
+    <content type="html">&lt;p&gt;jade是一个模板引擎，可以通过node.js来使用。本来对前端技术了解不多，接触jade源于搭建hexo博客系统。maupassant主题模板是基于jade的，所以想按自己的想法来定制maupassant主题简单了解了一下jade。&lt;/p&gt;
+&lt;p&gt;hexo的maupassant主题是一个极简主题模板，安装也很简单，用起来不错，但是有些小地方还是想按照自己的想法改一改：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;免费；&lt;/li&gt;
-&lt;li&gt;界面漂亮&lt;/li&gt;
-&lt;li&gt;能使用markdown语法书写；&lt;/li&gt;
-&lt;li&gt;能够导出到evernote。&lt;/li&gt;
+&lt;li&gt;默认只有归档，没有tags和categories。而且添加了tags和categories后不能显示tags和categories的列表；&lt;/li&gt;
+&lt;li&gt;每篇文章tags标签在文章末尾，希望categories一样在文章开头显示；&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;试了很多markdown的博客系统，在线编辑器，markdown软件，都无法满足，后来发现了Hexo。&lt;/p&gt;
-&lt;p&gt;Hexo是一个 markdown 博客系统，初步了解优点如下：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;没有数据库，直接保存 markdown 文件，所以迁移应该很方便；&lt;/li&gt;
-&lt;li&gt;可以自选theme；&lt;/li&gt;
-&lt;li&gt;在没有网络主机的情况下，可在本地搭建博客系统，通过github页可以实现远程备份；&lt;/li&gt;
-&lt;li&gt;开源。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;以上基本可以满足个人需求。&lt;/p&gt;
-&lt;p&gt;##如何搭建本地Hexo环境？&lt;/p&gt;
-&lt;p&gt;搭建Hexo环境很简单，Hexo是基于nodejs的，所以首先需要有node环境，如何安装node可参考&lt;a href=&quot;www.aaa.com&quot;&gt;源码编译安装nodejs&lt;/a&gt;。&lt;/p&gt;
-&lt;h3 id=&quot;1-安装Hexo&quot;&gt;&lt;a href=&quot;#1-安装Hexo&quot; class=&quot;headerlink&quot; title=&quot;1. 安装Hexo&quot;&gt;&lt;/a&gt;1. 安装Hexo&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;npm install hexo -g&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;2-升级&quot;&gt;&lt;a href=&quot;#2-升级&quot; class=&quot;headerlink&quot; title=&quot;2. 升级&quot;&gt;&lt;/a&gt;2. 升级&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;npm update hexo -g&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;3-初始化&quot;&gt;&lt;a href=&quot;#3-初始化&quot; class=&quot;headerlink&quot; title=&quot;3. 初始化&quot;&gt;&lt;/a&gt;3. 初始化&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;mkdir hexo&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;cd hexo&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hexo init&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;4-生成&quot;&gt;&lt;a href=&quot;#4-生成&quot; class=&quot;headerlink&quot; title=&quot;4. 生成&quot;&gt;&lt;/a&gt;4. 生成&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;hexo generate&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;or&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hexo g&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;5-启动服务&quot;&gt;&lt;a href=&quot;#5-启动服务&quot; class=&quot;headerlink&quot; title=&quot;5. 启动服务&quot;&gt;&lt;/a&gt;5. 启动服务&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;hexo server&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;or&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hexo s&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;启动后可在&lt;a href=&quot;http://localhost:4000&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:4000&lt;/a&gt;访问。&lt;/p&gt;
-&lt;h2 id=&quot;如何更换主题&quot;&gt;&lt;a href=&quot;#如何更换主题&quot; class=&quot;headerlink&quot; title=&quot;如何更换主题&quot;&gt;&lt;/a&gt;如何更换主题&lt;/h2&gt;&lt;p&gt;Hexo有很多主题，&lt;a href=&quot;https://hexo.io/themes/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://hexo.io/themes/&lt;/a&gt;网站上列举了一些主题，并带有效果展示。如果没有中意的主题，可以继续google一下。&lt;/p&gt;
-&lt;p&gt;安装主题方法也很简单，以 maupassant 为例：&lt;/p&gt;
-&lt;h3 id=&quot;1-下载主题&quot;&gt;&lt;a href=&quot;#1-下载主题&quot; class=&quot;headerlink&quot; title=&quot;1.下载主题&quot;&gt;&lt;/a&gt;1.下载主题&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;cd hexo/themes&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;git clone git@github.com:tufu9441/maupassant-hexo.git maupassant&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;npm install hexo-renderer-jade --save&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;npm install hexo-renderer-sass --save&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;2-更换主题&quot;&gt;&lt;a href=&quot;#2-更换主题&quot; class=&quot;headerlink&quot; title=&quot;2.更换主题&quot;&gt;&lt;/a&gt;2.更换主题&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;vi hexo/_config.yml&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;language: zh-CN&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;theme: maupassant&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;从新启动后可看到效果。&lt;/p&gt;
-&lt;h2 id=&quot;第一篇博客&quot;&gt;&lt;a href=&quot;#第一篇博客&quot; class=&quot;headerlink&quot; title=&quot;第一篇博客&quot;&gt;&lt;/a&gt;第一篇博客&lt;/h2&gt;&lt;p&gt;现在可以开始写第一篇博客了，使用&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;hexo new helloworld&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;or&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hexo n helloworld&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;就创建了一篇新博客，存放在&lt;strong&gt;hexo/source/_posts/&lt;/strong&gt;下，刷新网页可看到效果。&lt;/p&gt;
-&lt;h2 id=&quot;部署到github&quot;&gt;&lt;a href=&quot;#部署到github&quot; class=&quot;headerlink&quot; title=&quot;部署到github&quot;&gt;&lt;/a&gt;部署到github&lt;/h2&gt;&lt;p&gt;使用github的好处除了进行远程备份之外，还能直接通过github网站访问博客，非常方便。&lt;/p&gt;
-&lt;h3 id=&quot;1-修改配置&quot;&gt;&lt;a href=&quot;#1-修改配置&quot; class=&quot;headerlink&quot; title=&quot;1. 修改配置&quot;&gt;&lt;/a&gt;1. 修改配置&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;vi hexo/_config.yml&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;url: http://bysonline.github.io&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;deploy:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  type: git&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  repository: git@github.com:bsyonline/bsyonline.github.io.git&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  branch: master&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;2-部署&quot;&gt;&lt;a href=&quot;#2-部署&quot; class=&quot;headerlink&quot; title=&quot;2. 部署&quot;&gt;&lt;/a&gt;2. 部署&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;hexo g&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hexo d&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;完成之后可以访问bsyonline.github.io看到效果。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注：github的仓库名字必须是xxx.github.io&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;至此，本地的hexo博客系统就搭建好了。&lt;/p&gt;
+&lt;h3 id=&quot;增加tags列表&quot;&gt;&lt;a href=&quot;#增加tags列表&quot; class=&quot;headerlink&quot; title=&quot;增加tags列表&quot;&gt;&lt;/a&gt;增加tags列表&lt;/h3&gt;&lt;p&gt;安装hexo和maupassant主题后在themes/maupassant/_ config.yml中添加tags和categories两个menu，重启服务界面能看到tags和categories的菜单导航。但是点击会报找不到页面错误，所以还需要生成tags/index和categories/index。执行&lt;br&gt;&lt;figure class=&quot;highlight vim&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;hexo &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; page &lt;span class=&quot;keyword&quot;&gt;tags&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;hexo &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; page categories&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;会生成tags/index.md和categories/index.md文件，重启后不会再报找不到页面的错误。&lt;br&gt;但index.md默认是空白页面，内容需要自己写，所以想参考archive来写一些内容。想显示的内容也很简单，首先就是列出所有tags或categories，然后能显示每个tag或category下的文章数量。&lt;br&gt;网站的tags和categories不是固定的，所以在index.md中写死是不行的，需要利用模板来实现。看了看maupassant主题的layout结构，首先先参考archive.jade创建了一个tags.jade文件,只保留大的结构。&lt;br&gt;&lt;figure class=&quot;highlight xl&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;extends base&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;block&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;title&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;title&lt;/span&gt;= &lt;span class=&quot;built_in&quot;&gt;page&lt;/span&gt;.tag + &lt;span class=&quot;string&quot;&gt;&#39; | &#39;&lt;/span&gt; + config.&lt;span class=&quot;built_in&quot;&gt;title&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;block&lt;/span&gt; content&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  include _partial/paginator.jade&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;改变文章中tags的显示位置&quot;&gt;&lt;a href=&quot;#改变文章中tags的显示位置&quot; class=&quot;headerlink&quot; title=&quot;改变文章中tags的显示位置&quot;&gt;&lt;/a&gt;改变文章中tags的显示位置&lt;/h3&gt;&lt;p&gt;默认界面tags在文章结束坐下位置，但我期望在界面文章开始位置增加tags的显示，即在点击量统计的后边再增加显示tags内容。结合模板代码和界面的显示效果，可以大致定位到具体代码位置。文章正文默认使用的post模板，位于themes/maupassant/layout/post.jade。在文件15-19行是点击量统计的代码，所以在后面可添加tags显示代码。&lt;br&gt;&lt;figure class=&quot;highlight xl&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;page&lt;/span&gt;.tags.length &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  span= &lt;span class=&quot;string&quot;&gt;&#39; | &#39;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  span.tag&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; tag &lt;span class=&quot;built_in&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;page&lt;/span&gt;.tags.toArray()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      i(class=[&lt;span class=&quot;string&quot;&gt;&#39;fa&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;fa-paperclip&#39;&lt;/span&gt;]) &amp;amp;nbsp;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      a(href=url_for(tag.&lt;span class=&quot;built_in&quot;&gt;path&lt;/span&gt;))= tag.&lt;span class=&quot;keyword&quot;&gt;name&lt;/span&gt; + &lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;jade模板的语法有严格缩进要求，所以和上边的代码位置一致即可。&lt;br&gt;代码看起来很简单，但是改的时候还是费了一些周折。&lt;br&gt;&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;page&lt;span class=&quot;selector-class&quot;&gt;.tags&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.toArray&lt;/span&gt;()&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;的写法参考上文&lt;br&gt;&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;page&lt;span class=&quot;selector-class&quot;&gt;.categories&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.toArray&lt;/span&gt;()&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;很容易写出来。&lt;br&gt;&lt;figure class=&quot;highlight cs&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;i(&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt;=[&lt;span class=&quot;string&quot;&gt;&#39;fa&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;fa-paperclip&#39;&lt;/span&gt;]) &amp;amp;nbsp;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;是一个i标签，用于显示图标，渲染成html是&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;i &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt;&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;fa fa-paperclip&quot;&lt;/span&gt;&amp;gt;&amp;amp;nbsp;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;i&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;如果不看jade的语法，只根据post.jade文件中的代码可以大致推测jade的语法规则比如&lt;br&gt;&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;span&lt;/span&gt;.category&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;渲染成html后是&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;span &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt;&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;category&quot;&lt;/span&gt;&amp;gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;但是单class属性图标无法正常显示，也试过&lt;br&gt;&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.fa&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.fa-paperclip&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;或&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.fa&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;i&lt;/span&gt;.fa-paperclip&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;等等写法，均不能达到效果，只好去看jade的文档。在&lt;a href=&quot;http://jade-lang.com/reference/attributes/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://jade-lang.com/reference/attributes/&lt;/a&gt;中&lt;strong&gt;Class Attributes&lt;/strong&gt;找到了多个class的语法说明，问题至此得以解决。&lt;/p&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p&gt;为了更好的积累和保存学习笔记，需要满足以下要求：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;免费；&lt;/li&gt;
-&lt;li&gt;界面漂亮&lt;/li&gt;
-&lt;li&gt;能使用markdown语法书写；&lt;/li&gt;
-&lt;li&gt;能够导出到evernote。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;试了很多markdown的博客系统
+      &lt;p&gt;jade是一个模板引擎，可以通过node.js来使用。本来对前端技术了解不多，接触jade源于搭建hexo博客系统。maupassant主题模板是基于jade的，所以想按自己的想法来定制maupassant主题简单了解了一下jade。&lt;/p&gt;
+&lt;p&gt;hexo的maupass
     
     </summary>
     
-      <category term="hexo" scheme="http://bysonline.github.io/categories/hexo/"/>
+      <category term="technology" scheme="http://bysonline.github.io/categories/technology/"/>
     
     
-      <category term="hexo" scheme="http://bysonline.github.io/tags/hexo/"/>
+      <category term="jade" scheme="http://bysonline.github.io/tags/jade/"/>
     
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://bysonline.github.io/2016/07/14/hello-world/"/>
-    <id>http://bysonline.github.io/2016/07/14/hello-world/</id>
-    <published>2016-07-14T10:43:48.765Z</published>
-    <updated>2016-07-14T10:43:48.765Z</updated>
+    <title></title>
+    <link href="http://bysonline.github.io/2016/07/18/hbase%20%E4%BC%AA%E5%88%86%E5%B8%83%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85/"/>
+    <id>http://bysonline.github.io/2016/07/18/hbase 伪分布模式安装/</id>
+    <published>2016-07-18T05:11:01.733Z</published>
+    <updated>2016-07-18T05:11:01.733Z</updated>
     
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo server&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo generate&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo deploy&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;hbase 伪分布模式安装&lt;/p&gt;
+&lt;h2 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;=&quot;&gt;&lt;/a&gt;=&lt;/h2&gt;&lt;p&gt;title: hbase shell 操作&lt;br&gt;toc: true&lt;br&gt;date: 2016-07-16 15:49:44&lt;br&gt;tags:&lt;/p&gt;
+&lt;h2 id=&quot;categories&quot;&gt;&lt;a href=&quot;#categories&quot; class=&quot;headerlink&quot; title=&quot;categories:&quot;&gt;&lt;/a&gt;categories:&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;version hbase-0.94.26.tar.gz&lt;/p&gt;
+&lt;p&gt;####1. 解压缩&lt;br&gt;    tar -zxvf hbase-0.94.26.tar.gz&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;####2. 修改配置文件&lt;/p&gt;
+&lt;p&gt;#####hbase-env.sh&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# The java implementation to use.  Java 1.6 required.
+export JAVA_HOME=/usr/java/jdk1.6.0_45/
+# Extra Java CLASSPATH elements.  Optional.
+export HBASE_CLASSPATH=/user/hadoop/hadoop-1.2.1/conf
+# Tell HBase whether it should manage it&amp;apos;s own instance of Zookeeper or not.
+export HBASE_MANAGES_ZK=true
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;#####hbase-site.xml&lt;br&gt;    &lt;configuration&gt;&lt;br&gt;        &lt;property&gt;&lt;br&gt;            &lt;name&gt;hbase.rootdir&lt;/name&gt;&lt;br&gt;            &lt;value&gt;hdfs://localhost:9000/hbase&lt;/value&gt;&lt;br&gt;          &lt;/property&gt;&lt;br&gt;        &lt;property&gt;&lt;br&gt;            &lt;name&gt;hbase.cluster.distributed&lt;/name&gt;&lt;br&gt;            &lt;value&gt;true&lt;/value&gt;&lt;br&gt;          &lt;/property&gt;&lt;br&gt;           &lt;property&gt;&lt;br&gt;            &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;&lt;br&gt;            &lt;value&gt;localhost&lt;/value&gt;&lt;br&gt;          &lt;/property&gt;&lt;br&gt;    &lt;/configuration&gt;&lt;/p&gt;
+&lt;p&gt;####3. 运行&lt;br&gt;     /usr/hadoop/hadoop-1.2.1/bin&lt;br&gt;     [rolex@node2 bin]$ ./start-all.sh （先运行hdfs）&lt;br&gt;     /usr/hbase/hbase-0.94.27/bin&lt;br&gt;     [rolex@node2 bin]$ ./start-hbase.sh （启动hbase）&lt;br&gt;     [rolex@node2 bin]$ ./local-master-backup.sh start 1  （启动master备份）&lt;br&gt;     [rolex@node2 bin]$ ./local-regionservers.sh start 1  （启动regionserver）&lt;/p&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      &lt;p&gt;hbase 伪分布模式安装&lt;/p&gt;
+&lt;h2 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;=&quot;&gt;&lt;/a&gt;=&lt;/h2&gt;&lt;p&gt;title: hbase shell 操作&lt;br&gt;toc: true&lt;br&gt;date: 2016-07-16 
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Client SDK (Java 版)</title>
+    <link href="http://bysonline.github.io/2016/07/16/Client%20SDK%20(Java%20%E7%89%88%EF%BC%89/"/>
+    <id>http://bysonline.github.io/2016/07/16/Client SDK (Java 版）/</id>
+    <published>2016-07-16T08:00:45.000Z</published>
+    <updated>2016-07-16T16:06:29.887Z</updated>
+    
+    <content type="html">&lt;figure class=&quot;highlight gauss&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;ChinadaasClient client = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ChinadaasClient(url, clientId, appId, &lt;span class=&quot;built_in&quot;&gt;token&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;PersonCheckRequest request1 = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; PersonCheckRequest(name, identity, &lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;String&lt;/span&gt; result = client.get(request1);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight gauss&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;ChinadaasClient client = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>电信数据核验接口</title>
+    <link href="http://bysonline.github.io/2016/07/16/%E7%94%B5%E4%BF%A1%E6%95%B0%E6%8D%AE%E6%A0%B8%E9%AA%8C%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://bysonline.github.io/2016/07/16/电信数据核验接口/</id>
+    <published>2016-07-16T08:00:43.000Z</published>
+    <updated>2016-07-16T15:03:58.145Z</updated>
+    
+    <content type="html">&lt;p&gt;信息核查是一系列查询api接口，以REST服务方式提供。用户按照指定规则开发接口程序或引入SDK后，可通过程序调用接口。使用前请先申请客户账号和令牌。令牌由客户保存，用于生成签名。为使该服务的使用者详细了解服务接口调用方法和规范，特编制此接口使用说明文档。&lt;/p&gt;
+&lt;h3 id=&quot;公共参数&quot;&gt;&lt;a href=&quot;#公共参数&quot; class=&quot;headerlink&quot; title=&quot;公共参数&quot;&gt;&lt;/a&gt;公共参数&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;是否必需&lt;/th&gt;
+&lt;th&gt;示例值&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;clientId&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;必须&lt;/td&gt;
+&lt;td&gt;guest&lt;/td&gt;
+&lt;td&gt;用户唯一标识&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;signatrue&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;必须&lt;/td&gt;
+&lt;td&gt;123&lt;/td&gt;
+&lt;td&gt;用户请求的数据签名，由用户令牌，timestamp，nonce加密获得&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;timestamp&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;必须&lt;/td&gt;
+&lt;td&gt;2016-07-05 13:42:10&lt;/td&gt;
+&lt;td&gt;时间戳，服务器允许最大10分钟误差&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;nonce&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;必须&lt;/td&gt;
+&lt;td&gt;-1200534598&lt;/td&gt;
+&lt;td&gt;随机数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;type&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;可选&lt;/td&gt;
+&lt;td&gt;xml&lt;/td&gt;
+&lt;td&gt;默认为json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&quot;1-电信数据身份核验&quot;&gt;&lt;a href=&quot;#1-电信数据身份核验&quot; class=&quot;headerlink&quot; title=&quot;1. 电信数据身份核验&quot;&gt;&lt;/a&gt;1. 电信数据身份核验&lt;/h3&gt;&lt;p&gt;根据提供的手机号，姓名，身份证号，由系统针对信息的一致性进行核查，并返回结果。&lt;/p&gt;
+&lt;h4 id=&quot;1-1-URL&quot;&gt;&lt;a href=&quot;#1-1-URL&quot; class=&quot;headerlink&quot; title=&quot;1.1 URL&quot;&gt;&lt;/a&gt;1.1 URL&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;http://ip:port/drink/greenTea&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ip:port/drink/greenTea&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;1-2-请求参数&quot;&gt;&lt;a href=&quot;#1-2-请求参数&quot; class=&quot;headerlink&quot; title=&quot;1.2 请求参数&quot;&gt;&lt;/a&gt;1.2 请求参数&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;是否必需&lt;/th&gt;
+&lt;th&gt;示例值&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;必须&lt;/td&gt;
+&lt;td&gt;张三&lt;/td&gt;
+&lt;td&gt;人员姓名&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;phone&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;必须&lt;/td&gt;
+&lt;td&gt;18610011001&lt;/td&gt;
+&lt;td&gt;手机号码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;identity&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;必须&lt;/td&gt;
+&lt;td&gt;210219197101011246&lt;/td&gt;
+&lt;td&gt;身份证&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&quot;1-3-响应参数&quot;&gt;&lt;a href=&quot;#1-3-响应参数&quot; class=&quot;headerlink&quot; title=&quot;1.3 响应参数&quot;&gt;&lt;/a&gt;1.3 响应参数&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;类&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;data&lt;/td&gt;
+&lt;td&gt;Object&lt;/td&gt;
+&lt;td&gt;返回消息数据结构&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;├ errorCode&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;错误码，0表示成功&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;└ result&lt;/td&gt;
+&lt;td&gt;Object&lt;/td&gt;
+&lt;td&gt;核验结果数据结构&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;├ code&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;消息码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;├ message&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;消息说明&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&quot;1-4-响应示例&quot;&gt;&lt;a href=&quot;#1-4-响应示例&quot; class=&quot;headerlink&quot; title=&quot;1.4 响应示例&quot;&gt;&lt;/a&gt;1.4 响应示例&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;xml&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;php&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?&lt;/span&gt;xml version=&lt;span class=&quot;string&quot;&gt;&quot;1.0&quot;&lt;/span&gt; encoding=&lt;span class=&quot;string&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt; standalone=&lt;span class=&quot;string&quot;&gt;&quot;yes&quot;&lt;/span&gt;&lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;data&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;errorCode&lt;/span&gt;&amp;gt;&lt;/span&gt;0&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;errorCode&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;result&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;code&lt;/span&gt;&amp;gt;&lt;/span&gt;2&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;code&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;message&lt;/span&gt;&amp;gt;&lt;/span&gt;核验不一致&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;message&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;result&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;data&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;json&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight json&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;&quot;errorCode&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;0&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;&quot;result&quot;&lt;/span&gt;:&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;attr&quot;&gt;&quot;code&quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&quot;2&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;attr&quot;&gt;&quot;message&quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&quot;核验不一致&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h4 id=&quot;1-5-异常&quot;&gt;&lt;a href=&quot;#1-5-异常&quot; class=&quot;headerlink&quot; title=&quot;1.5 异常&quot;&gt;&lt;/a&gt;1.5 异常&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;xml&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;php&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?&lt;/span&gt;xml version=&lt;span class=&quot;string&quot;&gt;&quot;1.0&quot;&lt;/span&gt; encoding=&lt;span class=&quot;string&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt; standalone=&lt;span class=&quot;string&quot;&gt;&quot;yes&quot;&lt;/span&gt;&lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;data&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;errorCode&lt;/span&gt;&amp;gt;&lt;/span&gt;9995&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;errorCode&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;data&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;json&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight json&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;&quot;errorCode&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;9995&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h4 id=&quot;1-6-消息码描述&quot;&gt;&lt;a href=&quot;#1-6-消息码描述&quot; class=&quot;headerlink&quot; title=&quot;1.6 消息码描述&quot;&gt;&lt;/a&gt;1.6 消息码描述&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;代码值&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;code&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;一致&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;不一致&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&quot;返回消息代码解释&quot;&gt;&lt;a href=&quot;#返回消息代码解释&quot; class=&quot;headerlink&quot; title=&quot;返回消息代码解释&quot;&gt;&lt;/a&gt;返回消息代码解释&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;代码值&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;errorCode&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;成功&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;9999&lt;/td&gt;
+&lt;td&gt;用户身份信息错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;9998&lt;/td&gt;
+&lt;td&gt;账户状态异常&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;9997&lt;/td&gt;
+&lt;td&gt;账户类型异常&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;9996&lt;/td&gt;
+&lt;td&gt;没有订购该产品&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;9995&lt;/td&gt;
+&lt;td&gt;没有查询权限&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;9994&lt;/td&gt;
+&lt;td&gt;请求参数格式不正确&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;9993&lt;/td&gt;
+&lt;td&gt;系统内部错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;9992&lt;/td&gt;
+&lt;td&gt;请求过期&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;信息核查是一系列查询api接口，以REST服务方式提供。用户按照指定规则开发接口程序或引入SDK后，可通过程序调用接口。使用前请先申请客户账号和令牌。令牌由客户保存，用于生成签名。为使该服务的使用者详细了解服务接口调用方法和规范，特编制此接口使用说明文档。&lt;/p&gt;
+&lt;h3 
+    
+    </summary>
+    
+      <category term="technology" scheme="http://bysonline.github.io/categories/technology/"/>
+    
+    
+      <category term="chinadaas" scheme="http://bysonline.github.io/tags/chinadaas/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>zookeeper-3.4.6 安装</title>
+    <link href="http://bysonline.github.io/2016/07/16/zookeeper-3.4.6%20%E5%AE%89%E8%A3%85/"/>
+    <id>http://bysonline.github.io/2016/07/16/zookeeper-3.4.6 安装/</id>
+    <published>2016-07-16T08:00:38.000Z</published>
+    <updated>2016-07-16T15:11:34.825Z</updated>
+    
+    <content type="html">&lt;p&gt;###1. 环境变量&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo echo “ZOOKEEPER_HOME=/usr/zookeeper/zookeeper-3.4.6”&amp;gt;/etc/profile.d/zookeeper.sh&lt;/p&gt;
+&lt;p&gt;sudo echo ‘PATH=\$PATH :$ZOOKEEPER_HOME/bin’&amp;gt;&amp;gt;/etc/profile.d/zookeeper.sh&lt;/p&gt;
+&lt;p&gt;. /etc/profile&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###2. 配置文件&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;cp /usr/zookeeper/zookeeper-3.4.6/conf/zoo_sample.cfd /usr/zookeeper/zookeeper-3.4.6/conf/zoo.cfd&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###3. 启动zookeeper&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;/usr/zookeeper/zookeeper-3.4.6/bin/zkServer.sh start&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;###1. 环境变量&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;sudo echo “ZOOKEEPER_HOME=/usr/zookeeper/zookeeper-3.4.6”&amp;gt;/etc/profile.d/zookeeper.sh&lt;/p&gt;
+&lt;p&gt;sudo echo 
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>jQuery常用操作操作</title>
+    <link href="http://bysonline.github.io/2016/07/16/jQuery%20%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E6%93%8D%E4%BD%9C/"/>
+    <id>http://bysonline.github.io/2016/07/16/jQuery 常用操作操作/</id>
+    <published>2016-07-16T08:00:33.000Z</published>
+    <updated>2016-07-16T15:11:34.841Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;1-遍历json-map&quot;&gt;&lt;a href=&quot;#1-遍历json-map&quot; class=&quot;headerlink&quot; title=&quot;1. 遍历json map&quot;&gt;&lt;/a&gt;1. 遍历json map&lt;/h3&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$.each(map,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;key,values&lt;/span&gt;)&lt;/span&gt;&amp;#123;     &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(key);     &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    $(values).each(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;     &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;/t&quot;&lt;/span&gt; + &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;);     &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;);     &lt;/div&gt;&lt;div class=&quot;line&quot;&gt; &amp;#125;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h1 id=&quot;windows-安装compass-and-scss&quot;&gt;&lt;a href=&quot;#windows-安装compass-and-scss&quot; class=&quot;headerlink&quot; title=&quot;windows 安装compass and scss&quot;&gt;&lt;/a&gt;windows 安装compass and scss&lt;/h1&gt;&lt;p&gt;标签（空格分隔）： web&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;###1. 安装ruby&lt;/p&gt;
+&lt;p&gt;compass是ruby的插件，需要先安装ruby环境。&lt;/p&gt;
+&lt;p&gt;####1.1 下载ruby&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://rubyinstaller.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://rubyinstaller.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;####1.2 添加环境变量&lt;br&gt;安装完成后添加环境变量&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;RUBY_HOME=D:\Ruby23-x64
+path=$path;%RUBY_HOME%\bin
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;执行ruby -v 显示版本号则安装成功。&lt;/p&gt;
+&lt;p&gt;###2. 添加证书&lt;/p&gt;
+&lt;p&gt;####2.1 下载证书&lt;/p&gt;
+&lt;p&gt;从&lt;a href=&quot;http://curl.haxx.se/ca/cacert.pem&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://curl.haxx.se/ca/cacert.pem&lt;/a&gt;下载证书，保存到ruby安装目录。&lt;/p&gt;
+&lt;p&gt;####2.2 添加环境变量&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SSL_CERT_FILE=D:\Ruby23-x64\cacert.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;###3. 修改源&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;gem sources –remove &lt;a href=&quot;https://rubygems.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://rubygems.org/&lt;/a&gt;&lt;br&gt;    gem sources -a &lt;a href=&quot;https://ruby.taobao.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://ruby.taobao.org/&lt;/a&gt;&lt;br&gt;    gem sources -l&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###4. 安装compass&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;gem install compass&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;sass -v显示版本号则安装成功。正常情况compass和scss都会安装。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-遍历json-map&quot;&gt;&lt;a href=&quot;#1-遍历json-map&quot; class=&quot;headerlink&quot; title=&quot;1. 遍历json map&quot;&gt;&lt;/a&gt;1. 遍历json map&lt;/h3&gt;&lt;figure class=&quot;highlight javasc
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>sqlplus执行文件</title>
+    <link href="http://bysonline.github.io/2016/07/16/sqlplus%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/"/>
+    <id>http://bysonline.github.io/2016/07/16/sqlplus执行文件/</id>
+    <published>2016-07-16T08:00:30.000Z</published>
+    <updated>2016-07-16T15:11:34.849Z</updated>
+    
+    <content type="html">&lt;p&gt;#####1. 连接数据库&lt;br&gt;    sqlplus user/password@192.168.11.15:1521/orcl&lt;/p&gt;
+&lt;p&gt;#####2. 执行文件&lt;br&gt;    SQL&amp;gt;@D:\a.sql&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#####1. 连接数据库&lt;br&gt;    sqlplus user/password@192.168.11.15:1521/orcl&lt;/p&gt;
+&lt;p&gt;#####2. 执行文件&lt;br&gt;    SQL&amp;gt;@D:\a.sql&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>spring boot 使用</title>
+    <link href="http://bysonline.github.io/2016/07/16/spring%20boot%20%E4%BD%BF%E7%94%A8/"/>
+    <id>http://bysonline.github.io/2016/07/16/spring boot 使用/</id>
+    <published>2016-07-16T08:00:27.000Z</published>
+    <updated>2016-07-16T15:10:24.922Z</updated>
+    
+    <content type="html">&lt;p&gt;spring boot可使用Main运行一个web程序，对于简单的web应用还是比较方便的。&lt;/p&gt;
+&lt;h3 id=&quot;1-工程目录&quot;&gt;&lt;a href=&quot;#1-工程目录&quot; class=&quot;headerlink&quot; title=&quot;1. 工程目录&quot;&gt;&lt;/a&gt;1. 工程目录&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;project
+    src/main/assembly/assembly.xml
+    src/main/java/com/rolex/samples/
+        bean/
+        controller/
+        dao/
+        service/
+        util/
+        Main.java
+    src/main/resources/
+        static/  (相当于webcontent)
+            css/
+            html/
+            js/
+            index.html
+        application.properties    
+    test/
+    target/
+    pom.xml
+    README.md
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;2-程序主要文件&quot;&gt;&lt;a href=&quot;#2-程序主要文件&quot; class=&quot;headerlink&quot; title=&quot;2. 程序主要文件&quot;&gt;&lt;/a&gt;2. 程序主要文件&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;Main.java&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight actionscript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&lt;span class=&quot;meta-keyword&quot;&gt;import&lt;/span&gt; org.springframework.boot.SpringApplication;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&lt;span class=&quot;meta-keyword&quot;&gt;import&lt;/span&gt; org.springframework.boot.autoconfigure.SpringBootApplication;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; * Created with IntelliJ IDEA.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; * User: rolex&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; * Date: 2016/05/06&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; * Version: 1.0&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; */&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@SpringBootApplication&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Main&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; main(String[] args) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        SpringApplication.run(Main.class, args);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Main是程序的入口类，程序启动时会扫描Main所在目录子目录的所有文件进行spring注入（对声明了spring注解的类有效）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;pom.xml&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;php&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?&lt;/span&gt;xml version=&lt;span class=&quot;string&quot;&gt;&quot;1.0&quot;&lt;/span&gt; encoding=&lt;span class=&quot;string&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;project&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;xmlns&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://maven.apache.org/POM/4.0.0&quot;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         &lt;span class=&quot;attr&quot;&gt;xmlns:xsi&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         &lt;span class=&quot;attr&quot;&gt;xsi:schemaLocation&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&lt;/span&gt;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    ...     &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;parent&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-boot-starter-parent&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;version&lt;/span&gt;&amp;gt;&lt;/span&gt;1.4.0.BUILD-SNAPSHOT&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;version&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;parent&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependencies&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-boot-starter-web&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-boot-devtools&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;optional&lt;/span&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;optional&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-boot-starter-jdbc&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependencies&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;repositories&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;repository&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-snapshots&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;name&lt;/span&gt;&amp;gt;&lt;/span&gt;Spring Snapshots&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;name&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;url&lt;/span&gt;&amp;gt;&lt;/span&gt;https://repo.spring.io/libs-snapshot&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;url&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;snapshots&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;enabled&lt;/span&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;enabled&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;snapshots&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;repository&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;repositories&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;project&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-启动&quot;&gt;&lt;a href=&quot;#2-启动&quot; class=&quot;headerlink&quot; title=&quot;2. 启动&quot;&gt;&lt;/a&gt;2. 启动&lt;/h3&gt;&lt;p&gt;执行命令&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;java -jar app.jar –spring.config.name=app&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;spring boot可使用Main运行一个web程序，对于简单的web应用还是比较方便的。&lt;/p&gt;
+&lt;h3 id=&quot;1-工程目录&quot;&gt;&lt;a href=&quot;#1-工程目录&quot; class=&quot;headerlink&quot; title=&quot;1. 工程目录&quot;&gt;&lt;/a&gt;1. 工程目录&lt;/h3&gt;&lt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>spring boot cache （redis）使用</title>
+    <link href="http://bysonline.github.io/2016/07/16/spring%20boot%20cache%20%EF%BC%88redis%EF%BC%89%E4%BD%BF%E7%94%A8/"/>
+    <id>http://bysonline.github.io/2016/07/16/spring boot cache （redis）使用/</id>
+    <published>2016-07-16T08:00:24.000Z</published>
+    <updated>2016-07-16T14:06:53.697Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;1-pom-xml&quot;&gt;&lt;a href=&quot;#1-pom-xml&quot; class=&quot;headerlink&quot; title=&quot;1. pom.xml&quot;&gt;&lt;/a&gt;1. pom.xml&lt;/h3&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-boot-starter-data-redis&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;2-cachemanager&quot;&gt;&lt;a href=&quot;#2-cachemanager&quot; class=&quot;headerlink&quot; title=&quot;2. cachemanager&quot;&gt;&lt;/a&gt;2. cachemanager&lt;/h3&gt;&lt;figure class=&quot;highlight less&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;import org&lt;span class=&quot;selector-class&quot;&gt;.springframework&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.cache&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.CacheManager&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;import org&lt;span class=&quot;selector-class&quot;&gt;.springframework&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.cache&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.annotation&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.EnableCaching&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;import org&lt;span class=&quot;selector-class&quot;&gt;.springframework&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.cache&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.interceptor&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.KeyGenerator&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;import org&lt;span class=&quot;selector-class&quot;&gt;.springframework&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.context&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.annotation&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.Bean&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;import org&lt;span class=&quot;selector-class&quot;&gt;.springframework&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.context&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.annotation&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.Configuration&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;import org&lt;span class=&quot;selector-class&quot;&gt;.springframework&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.data&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.redis&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.cache&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.RedisCacheManager&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;import org&lt;span class=&quot;selector-class&quot;&gt;.springframework&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.data&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.redis&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.core&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.RedisTemplate&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;import java&lt;span class=&quot;selector-class&quot;&gt;.lang&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.reflect&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.Method&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;@Configuration&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;@EnableCaching&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;public class RedisCache &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;variable&quot;&gt;@Bean&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    public CacheManager cacheManager(&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;variable&quot;&gt;@SuppressWarnings&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;rawtypes&quot;&lt;/span&gt;) RedisTemplate redisTemplate) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        return new RedisCacheManager(redisTemplate);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     * 自定义key的生成策略&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     * @return&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     */&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;variable&quot;&gt;@Bean&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    public KeyGenerator myKeyGenerator()&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;selector-tag&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;KeyGenerator&lt;/span&gt;() &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;variable&quot;&gt;@Override&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            public Object generate(Object target, Method method, Object... params) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                StringBuilder sb = new StringBuilder();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;selector-tag&quot;&gt;for&lt;/span&gt; (Object &lt;span class=&quot;attribute&quot;&gt;obj &lt;/span&gt;: params) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    sb&lt;span class=&quot;selector-class&quot;&gt;.append&lt;/span&gt;(obj.toString());&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                return sb.toString();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;3-方法上添加注解&quot;&gt;&lt;a href=&quot;#3-方法上添加注解&quot; class=&quot;headerlink&quot; title=&quot;3. 方法上添加注解&quot;&gt;&lt;/a&gt;3. 方法上添加注解&lt;/h3&gt;&lt;figure class=&quot;highlight less&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;@Cacheable&lt;/span&gt;(value = &lt;span class=&quot;string&quot;&gt;&quot;entInfo&quot;&lt;/span&gt;, keyGenerator = &lt;span class=&quot;string&quot;&gt;&quot;myKeyGenerator&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;public EntMultipleInfo findEntInfo(String entName) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    looger&lt;span class=&quot;selector-class&quot;&gt;.info&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;no cache&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在调用方法前会先去查询是否有缓存。&lt;br&gt;对象需要能够序列化&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;4-application-properties&quot;&gt;&lt;a href=&quot;#4-application-properties&quot; class=&quot;headerlink&quot; title=&quot;4. application.properties&quot;&gt;&lt;/a&gt;4. application.properties&lt;/h3&gt;&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;spring&lt;span class=&quot;selector-class&quot;&gt;.redis&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.database&lt;/span&gt;= &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;spring&lt;span class=&quot;selector-class&quot;&gt;.redis&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.host&lt;/span&gt;=&lt;span class=&quot;number&quot;&gt;192.168&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;11.21&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;spring&lt;span class=&quot;selector-class&quot;&gt;.redis&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.port&lt;/span&gt;=&lt;span class=&quot;number&quot;&gt;6379&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;spring&lt;span class=&quot;selector-class&quot;&gt;.redis&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.pool&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.max-idle&lt;/span&gt;=&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;spring&lt;span class=&quot;selector-class&quot;&gt;.redis&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.pool&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.min-idle&lt;/span&gt;=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;spring&lt;span class=&quot;selector-class&quot;&gt;.redis&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.pool&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.max-active&lt;/span&gt;=&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;spring&lt;span class=&quot;selector-class&quot;&gt;.redis&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.pool&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.max-wait&lt;/span&gt;=-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-pom-xml&quot;&gt;&lt;a href=&quot;#1-pom-xml&quot; class=&quot;headerlink&quot; title=&quot;1. pom.xml&quot;&gt;&lt;/a&gt;1. pom.xml&lt;/h3&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;t
+    
+    </summary>
+    
+      <category term="technology" scheme="http://bysonline.github.io/categories/technology/"/>
+    
+    
+      <category term="spring-boot" scheme="http://bysonline.github.io/tags/spring-boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spark standalone 安装</title>
+    <link href="http://bysonline.github.io/2016/07/16/spark%20standalone%20%E5%AE%89%E8%A3%85/"/>
+    <id>http://bysonline.github.io/2016/07/16/spark standalone 安装/</id>
+    <published>2016-07-16T08:00:22.000Z</published>
+    <updated>2016-07-16T15:10:13.523Z</updated>
+    
+    <content type="html">&lt;p&gt;spark standalone即伪分布式部署,即在单击部署spark,部署方式比较简单.&lt;/p&gt;
+&lt;h3 id=&quot;1-下载spark安装包&quot;&gt;&lt;a href=&quot;#1-下载spark安装包&quot; class=&quot;headerlink&quot; title=&quot;1. 下载spark安装包&quot;&gt;&lt;/a&gt;1. 下载spark安装包&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://www.apache.org/dyn/closer.lua/spark/spark-1.6.1/spark-1.6.1-bin-hadoop2.6.tgz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.apache.org/dyn/closer.lua/spark/spark-1.6.1/spark-1.6.1-bin-hadoop2.6.tgz&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-解压&quot;&gt;&lt;a href=&quot;#2-解压&quot; class=&quot;headerlink&quot; title=&quot;2. 解压&quot;&gt;&lt;/a&gt;2. 解压&lt;/h3&gt;&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;-zxf&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;spark-1&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.6&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.1-bin-hadoop2&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.6&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.tgz&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;3-启动&quot;&gt;&lt;a href=&quot;#3-启动&quot; class=&quot;headerlink&quot; title=&quot;3. 启动&quot;&gt;&lt;/a&gt;3. 启动&lt;/h3&gt;&lt;figure class=&quot;highlight vim&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;./sbin/start-&lt;span class=&quot;keyword&quot;&gt;all&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;sh&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;启动后可访问&lt;a href=&quot;http://node1:8080&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://node1:8080&lt;/a&gt;查看信息&lt;/p&gt;
+&lt;h3 id=&quot;4-安装客户端&quot;&gt;&lt;a href=&quot;#4-安装客户端&quot; class=&quot;headerlink&quot; title=&quot;4. 安装客户端&quot;&gt;&lt;/a&gt;4. 安装客户端&lt;/h3&gt;&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;-zxf&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;spark-1&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.6&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.1-bin-hadoop2&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.6&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.tgz&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;5-启动客户端&quot;&gt;&lt;a href=&quot;#5-启动客户端&quot; class=&quot;headerlink&quot; title=&quot;5. 启动客户端&quot;&gt;&lt;/a&gt;5. 启动客户端&lt;/h3&gt;&lt;figure class=&quot;highlight crmsh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;./bin/spark-shell --&lt;span class=&quot;keyword&quot;&gt;master&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;spark&lt;/span&gt;://node1:&lt;span class=&quot;number&quot;&gt;7077&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;6-测试&quot;&gt;&lt;a href=&quot;#6-测试&quot; class=&quot;headerlink&quot; title=&quot;6. 测试&quot;&gt;&lt;/a&gt;6. 测试&lt;/h3&gt;&lt;figure class=&quot;highlight maxima&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; rdd1 = sc.textFile(&lt;span class=&quot;string&quot;&gt;&quot;hdfs://192.168.1.11:9000/user/sparkone/input/NOTICE.txt&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;val rdd2 = rdd1.flatMap(&lt;span class=&quot;symbol&quot;&gt;_&lt;/span&gt;.&lt;span class=&quot;built_in&quot;&gt;split&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot; &quot;&lt;/span&gt;)).&lt;span class=&quot;built_in&quot;&gt;map&lt;/span&gt;(x=&amp;gt;(x,&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)).reduceByKey(&lt;span class=&quot;symbol&quot;&gt;_&lt;/span&gt;+&lt;span class=&quot;symbol&quot;&gt;_&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;rdd2.take(&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;spark standalone即伪分布式部署,即在单击部署spark,部署方式比较简单.&lt;/p&gt;
+&lt;h3 id=&quot;1-下载spark安装包&quot;&gt;&lt;a href=&quot;#1-下载spark安装包&quot; class=&quot;headerlink&quot; title=&quot;1. 下载spark安装包&quot;&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一个shell脚本示例</title>
+    <link href="http://bysonline.github.io/2016/07/16/%E4%B8%80%E4%B8%AAshell%E8%84%9A%E6%9C%AC%E7%A4%BA%E4%BE%8B/"/>
+    <id>http://bysonline.github.io/2016/07/16/一个shell脚本示例/</id>
+    <published>2016-07-16T08:00:19.000Z</published>
+    <updated>2016-07-16T15:04:44.520Z</updated>
+    
+    <content type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#``倒引号中是需要执行命令&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#找到文件名字，/opt/demo/current/bin/start.sh&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;SCRIPT_PATH=`readlink &lt;span class=&quot;_&quot;&gt;-f&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$0&lt;/span&gt;&quot;&lt;/span&gt;`&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#可用于定位路径，不用写绝对路径，增加可移植性&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; `dirname &lt;span class=&quot;variable&quot;&gt;$&amp;#123;SCRIPT_PATH&amp;#125;&lt;/span&gt;`&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#定位到/opt/demo/current/&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;cd&lt;/span&gt; ..&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#创建目录&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;mkdir -p logs&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;PID_FILE=logs/web.pid&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;PID=&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#如果文件存在，则读文件&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [ &lt;span class=&quot;_&quot;&gt;-f&lt;/span&gt; &lt;span class=&quot;variable&quot;&gt;$PID_FILE&lt;/span&gt; ]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    PID=`cat &lt;span class=&quot;variable&quot;&gt;$PID_FILE&lt;/span&gt;`&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#如果pid不为空，使用ps查进程&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [ ! &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$PID&lt;/span&gt;&quot;&lt;/span&gt; = &lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt; ]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;#查到任何信息都丢弃，如果查到信息返回0，输出提示消息，没查到返回1&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ( /bin/ps -p &lt;span class=&quot;variable&quot;&gt;$PID&lt;/span&gt; &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 )&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;already started, pid = &lt;span class=&quot;variable&quot;&gt;$PID&lt;/span&gt;&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt; 1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;CP=&lt;span class=&quot;string&quot;&gt;&quot;etc&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#将target/classes加到classpath&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [ &lt;span class=&quot;_&quot;&gt;-d&lt;/span&gt; target/classes ]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    CP=&lt;span class=&quot;variable&quot;&gt;$CP&lt;/span&gt;:target/classes&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#将lib目录下的所有jar包加到classpath&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; jar &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; `/bin/ls -1 lib/*.jar`&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;do&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    CP=&lt;span class=&quot;variable&quot;&gt;$CP&lt;/span&gt;:&lt;span class=&quot;variable&quot;&gt;$jar&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;done&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#执行java命令,$@表示所有的参数列表&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;java -cp &lt;span class=&quot;variable&quot;&gt;$CP&lt;/span&gt; com.daas.cfg.Main &lt;span class=&quot;variable&quot;&gt;$@&lt;/span&gt; &amp;amp;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#记录最后运行的后台Process的PID&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;PID=$!&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#记录最后运行的命令的结束代码（返回值）&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;CODE=$?&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#0 表示成功&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [ &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$CODE&lt;/span&gt;&quot;&lt;/span&gt; = &lt;span class=&quot;string&quot;&gt;&quot;0&quot;&lt;/span&gt; ]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;#将pid写到文件&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;variable&quot;&gt;$PID&lt;/span&gt; &amp;gt;&lt;span class=&quot;variable&quot;&gt;$PID_FILE&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;started, PID=&lt;span class=&quot;variable&quot;&gt;$PID&lt;/span&gt;&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;&lt;/div&gt;&lt;div cl
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Oracle分页sql模板</title>
+    <link href="http://bysonline.github.io/2016/07/16/Oracle%E5%88%86%E9%A1%B5sql%E6%A8%A1%E6%9D%BF/"/>
+    <id>http://bysonline.github.io/2016/07/16/Oracle分页sql模板/</id>
+    <published>2016-07-16T07:53:54.000Z</published>
+    <updated>2016-07-16T15:11:34.849Z</updated>
+    
+    <content type="html">&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt; *&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        A.*,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;ROWNUM&lt;/span&gt; RN&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt; (&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt; * &lt;span class=&quot;keyword&quot;&gt;FORM&lt;/span&gt; t&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      ) A&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;ROWNUM&lt;/span&gt; &amp;lt;= &lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;WHERE&lt;/span&gt; RN &amp;gt;= &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt; *&lt;/div&gt;&lt;div class=&quot;line
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Oracle日期转换</title>
+    <link href="http://bysonline.github.io/2016/07/16/Oracle%E6%97%A5%E6%9C%9F%E8%BD%AC%E6%8D%A2/"/>
+    <id>http://bysonline.github.io/2016/07/16/Oracle日期转换/</id>
+    <published>2016-07-16T07:53:51.000Z</published>
+    <updated>2016-07-16T15:11:34.849Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;1-英语日期格式转换&quot;&gt;&lt;a href=&quot;#1-英语日期格式转换&quot; class=&quot;headerlink&quot; title=&quot;1. 英语日期格式转换&quot;&gt;&lt;/a&gt;1. 英语日期格式转换&lt;/h3&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;TO_DATE&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;SUBSTR&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&#39;29-JAN-16 03.09.31.030943000 PM&#39;&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;9&lt;/span&gt;), &lt;span class=&quot;string&quot;&gt;&#39;dd-MON-yy&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;NLS_DATE_LANGUAGE = American&#39;&lt;/span&gt;) d1,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  TO_CHAR(&lt;span class=&quot;keyword&quot;&gt;sysdate&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;DD-MON-YY&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;NLS_DATE_LANGUAGE = American&#39;&lt;/span&gt;) d2,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  TO_CHAR(&lt;span class=&quot;keyword&quot;&gt;sysdate&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;DD-MON-YY&#39;&lt;/span&gt;) d3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt; dual&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;d1&lt;/th&gt;
+&lt;th&gt;d2&lt;/th&gt;
+&lt;th&gt;d3&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2016-01-29 00:00:00&lt;/td&gt;
+&lt;td&gt;01-JUL-16&lt;/td&gt;
+&lt;td&gt;01-7月 -16&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-英语日期格式转换&quot;&gt;&lt;a href=&quot;#1-英语日期格式转换&quot; class=&quot;headerlink&quot; title=&quot;1. 英语日期格式转换&quot;&gt;&lt;/a&gt;1. 英语日期格式转换&lt;/h3&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;t
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Oracle Clob 格式处理</title>
+    <link href="http://bysonline.github.io/2016/07/16/Oracle%20Clob%20%E6%A0%BC%E5%BC%8F%E5%A4%84%E7%90%86/"/>
+    <id>http://bysonline.github.io/2016/07/16/Oracle Clob 格式处理/</id>
+    <published>2016-07-16T07:53:49.000Z</published>
+    <updated>2016-07-16T15:09:42.107Z</updated>
+    
+    <content type="html">&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    Clob clob = resultSet.getClob(&lt;span class=&quot;string&quot;&gt;&quot;FCT_PARTY&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (clob != &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt; &amp;amp;&amp;amp; clob.length() &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[] c = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;[(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;) clob.length()];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        Reader reader = clob.getCharacterStream();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        reader.read(c);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        fygg.setParty(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; String(c));&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        reader.close();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125; &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt; (IOException e) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    logger.error(&lt;span class=&quot;string&quot;&gt;&quot;column &amp;#123;&amp;#125;.FCT_PARTY read failed.&quot;&lt;/span&gt;, tableName, e);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;l
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>nexus私服搭建</title>
+    <link href="http://bysonline.github.io/2016/07/16/nexus%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/"/>
+    <id>http://bysonline.github.io/2016/07/16/nexus私服搭建/</id>
+    <published>2016-07-16T07:53:46.000Z</published>
+    <updated>2016-07-16T15:11:34.845Z</updated>
+    
+    <content type="html">&lt;p&gt;###1. 下载&lt;/p&gt;
+&lt;p&gt;下载最新的Nexus OSS&lt;br&gt;&lt;a href=&quot;http://www.sonatype.org/downloads/nexus-latest-bundle.tar.gz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.sonatype.org/downloads/nexus-latest-bundle.tar.gz&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;###2. 解压&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tar -zxf nexus-latest-bundle.tar.gz&lt;br&gt;mv nexus-2.11.1-01 nexus2&lt;/p&gt;
+&lt;p&gt;chown -R nexus2&lt;br&gt;chown -R sonatype-work&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###3. 启动&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;./bin/nexus start&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###4. 安装服务&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;vi ./bin/nexus&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;PIDDIR=&amp;quot;/home/rolex/piddir&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;sudo ln -s /home/soft/nexus/nexus-2.11.2-06/bin/nexus /etc/init.d/nexus&lt;br&gt;chkconfig –add nexus&lt;br&gt;chkconfig –levels 345 nexus on  &lt;/p&gt;
+&lt;p&gt;service nexus start&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###5. 访问&lt;/p&gt;
+&lt;p&gt;在浏览器中输入&lt;a href=&quot;http://192.168.1.201:8081/nexus/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://192.168.1.201:8081/nexus/&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;http://7xqgix.com1.z0.glb.clouddn.com/9.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
+&lt;p&gt;###6. 配置&lt;/p&gt;
+&lt;p&gt;管理员账号admin，默认密码admin123，通过右上角登录。&lt;/p&gt;
+&lt;p&gt;####6.1 添加代理仓库&lt;/p&gt;
+&lt;p&gt;点击左侧的Repositories，然后再点击右侧的Add，会弹出下拉菜单，选择Proxy Repository，如下配置。&lt;br&gt;&lt;img src=&quot;http://7xqgix.com1.z0.glb.clouddn.com/10.png&quot; alt=&quot;http://7xqgix.com1.z0.glb.clouddn.com/10.png&quot;&gt;&lt;br&gt;选中Public Repositories，将新建的Proxy Repository加入到Public Repositories组，并Update Index。&lt;br&gt;&lt;img src=&quot;http://7xqgix.com1.z0.glb.clouddn.com/11.png&quot; alt=&quot;http://7xqgix.com1.z0.glb.clouddn.com/11.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;####6.2 配置maven&lt;/p&gt;
+&lt;p&gt;修改maven的&lt;strong&gt;settings.xml&lt;/strong&gt;文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;mirrors&amp;gt;
+    &amp;lt;mirror&amp;gt;
+      &amp;lt;id&amp;gt;nexus&amp;lt;/id&amp;gt;
+      &amp;lt;mirrorOf&amp;gt;*&amp;lt;/mirrorOf&amp;gt;     
+      &amp;lt;url&amp;gt;http://192.168.1.201:8081/nexus/content/groups/public/&amp;lt;/url&amp;gt;
+    &amp;lt;/mirror&amp;gt;
+&amp;lt;/mirrors&amp;gt;
+
+&amp;lt;profiles&amp;gt;
+    &amp;lt;profile&amp;gt;
+      &amp;lt;id&amp;gt;nexus&amp;lt;/id&amp;gt;
+      &amp;lt;repositories&amp;gt;
+        &amp;lt;repository&amp;gt;
+          &amp;lt;id&amp;gt;nexus&amp;lt;/id&amp;gt;
+          &amp;lt;name&amp;gt;Nexus&amp;lt;/name&amp;gt;
+          &amp;lt;url&amp;gt;http://192.168.1.201:8081/nexus/content/groups/public/&amp;lt;/url&amp;gt;
+          &amp;lt;releases&amp;gt;&amp;lt;enabled&amp;gt;true&amp;lt;/enabled&amp;gt;&amp;lt;/releases&amp;gt;
+          &amp;lt;snapshots&amp;gt;&amp;lt;enabled&amp;gt;true&amp;lt;/enabled&amp;gt;&amp;lt;/snapshots&amp;gt;
+        &amp;lt;/repository&amp;gt;
+      &amp;lt;/repositories&amp;gt;
+      &amp;lt;pluginRepositories&amp;gt;
+        &amp;lt;pluginRepository&amp;gt;
+          &amp;lt;id&amp;gt;nexus&amp;lt;/id&amp;gt;
+            &amp;lt;name&amp;gt;Nexus&amp;lt;/name&amp;gt;
+            &amp;lt;url&amp;gt;http://192.168.1.201:8081/nexus/content/groups/public/&amp;lt;/url&amp;gt;
+            &amp;lt;releases&amp;gt;&amp;lt;enabled&amp;gt;true&amp;lt;/enabled&amp;gt;&amp;lt;/releases&amp;gt;
+            &amp;lt;snapshots&amp;gt;&amp;lt;enabled&amp;gt;true&amp;lt;/enabled&amp;gt;&amp;lt;/snapshots&amp;gt;
+        &amp;lt;/pluginRepository&amp;gt;
+      &amp;lt;/pluginRepositories&amp;gt;
+    &amp;lt;/profile&amp;gt;
+&amp;lt;/profiles&amp;gt;
+
+&amp;lt;activeProfiles&amp;gt;
+    &amp;lt;activeProfile&amp;gt;nexus&amp;lt;/activeProfile&amp;gt;
+  &amp;lt;/activeProfiles&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;第一次安装后，nexus私服仓库是空的，通过maven下载jar包显示从私服仓库下载，实际还是从公网下载，然后保存到本地,以后再下载相同的jar包就直接从本地下载了。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;###1. 下载&lt;/p&gt;
+&lt;p&gt;下载最新的Nexus OSS&lt;br&gt;&lt;a href=&quot;http://www.sonatype.org/downloads/nexus-latest-bundle.tar.gz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;h
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Maven打包专题</title>
+    <link href="http://bysonline.github.io/2016/07/16/Maven%E6%89%93%E5%8C%85%E4%B8%93%E9%A2%98/"/>
+    <id>http://bysonline.github.io/2016/07/16/Maven打包专题/</id>
+    <published>2016-07-16T07:53:42.000Z</published>
+    <updated>2016-07-16T15:11:34.845Z</updated>
+    
+    <content type="html">&lt;p&gt;###1. 可执行jar包&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;pom.xml&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;build&amp;gt;
+    &amp;lt;plugins&amp;gt;
+        &amp;lt;plugin&amp;gt;
+            &amp;lt;artifactId&amp;gt;maven-assembly-plugin&amp;lt;/artifactId&amp;gt;
+            &amp;lt;configuration&amp;gt;
+                &amp;lt;descriptorRefs&amp;gt;
+                    &amp;lt;descriptorRef&amp;gt;jar-with-dependencies&amp;lt;/descriptorRef&amp;gt;
+                &amp;lt;/descriptorRefs&amp;gt;
+                &amp;lt;archive&amp;gt;
+                    &amp;lt;manifest&amp;gt;
+                        &amp;lt;mainClass&amp;gt;com.rolex.tools.Ashbringer&amp;lt;/mainClass&amp;gt;
+                    &amp;lt;/manifest&amp;gt;
+                &amp;lt;/archive&amp;gt;
+            &amp;lt;/configuration&amp;gt;
+
+        &amp;lt;/plugin&amp;gt;
+    &amp;lt;/plugins&amp;gt;
+&amp;lt;/build&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用命令&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;mvn assembly:assembly&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;可生成可执行jar包。配置文件是打在jar包里边的，所以想灵活的使用外部配置文件，此方法并不合适。&lt;/p&gt;
+&lt;p&gt;###2. jar包&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;jar-with-dependencies&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;assembly&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;xmlns&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3&quot;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          &lt;span class=&quot;attr&quot;&gt;xmlns:xsi&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          &lt;span class=&quot;attr&quot;&gt;xsi:schemaLocation&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3 http://maven.apache.org/xsd/assembly-1.1.3.xsd&quot;&lt;/span&gt;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- &lt;span class=&quot;doctag&quot;&gt;TODO:&lt;/span&gt; a jarjar format would be better --&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;jar-with-dependencies&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;formats&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;format&lt;/span&gt;&amp;gt;&lt;/span&gt;jar&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;format&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;formats&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;includeBaseDirectory&lt;/span&gt;&amp;gt;&lt;/span&gt;false&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;includeBaseDirectory&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependencySets&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependencySet&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;outputDirectory&lt;/span&gt;&amp;gt;&lt;/span&gt;/&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;outputDirectory&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;useProjectArtifact&lt;/span&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;useProjectArtifact&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;unpack&lt;/span&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;unpack&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;scope&lt;/span&gt;&amp;gt;&lt;/span&gt;runtime&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;scope&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependencySet&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependencySets&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;assembly&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;###3. war包&lt;/p&gt;
+&lt;p&gt;###4. ear包&lt;/p&gt;
+&lt;p&gt;###5. tar.gz&lt;br&gt;针对开发、测试、生产环境各自有一套配置文件是，可将工程打tgz包部署，解压后使用软连接引用不同环境的配置。&lt;br&gt;文件目录如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;project
+    bin/
+    etc/
+    lib/
+    sql/
+    src/main/assembly/assembly.xml
+    src/main/java
+    src/main/resources
+    target/
+    pom.xml
+    README.md
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;pom.xml&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight dust&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;php&quot;&gt;&lt;span class=&quot;meta&quot;&gt;&amp;lt;?&lt;/span&gt;xml version=&lt;span class=&quot;string&quot;&gt;&quot;1.0&quot;&lt;/span&gt; encoding=&lt;span class=&quot;string&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;meta&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;project&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;xmlns&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://maven.apache.org/POM/4.0.0&quot;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         &lt;span class=&quot;attr&quot;&gt;xmlns:xsi&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         &lt;span class=&quot;attr&quot;&gt;xsi:schemaLocation&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&lt;/span&gt;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;modelVersion&lt;/span&gt;&amp;gt;&lt;/span&gt;4.0.0&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;modelVersion&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;com.rolex.maven.samples&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;maven-samples&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;version&lt;/span&gt;&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;version&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;properties&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;maven.build.timestamp.format&lt;/span&gt;&amp;gt;&lt;/span&gt;yyyyMMddHHmm&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;maven.build.timestamp.format&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;java-version&lt;/span&gt;&amp;gt;&lt;/span&gt;1.8&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;java-version&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;properties&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;profiles&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 防止idea每次更新pom都重置jdk设置 --&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;profile&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;jdk-1.8&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;activation&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;activeByDefault&lt;/span&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;activeByDefault&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;jdk&lt;/span&gt;&amp;gt;&lt;/span&gt;$&lt;span class=&quot;template-variable&quot;&gt;&amp;#123;java-version&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;jdk&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;activation&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;properties&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;maven.compiler.source&lt;/span&gt;&amp;gt;&lt;/span&gt;$&lt;span class=&quot;template-variable&quot;&gt;&amp;#123;java-version&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;maven.compiler.source&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;maven.compiler.target&lt;/span&gt;&amp;gt;&lt;/span&gt;$&lt;span class=&quot;template-variable&quot;&gt;&amp;#123;java-version&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;maven.compiler.target&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;maven.compiler.compilerVersion&lt;/span&gt;&amp;gt;&lt;/span&gt;$&lt;span class=&quot;template-variable&quot;&gt;&amp;#123;java-version&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;maven.compiler.compilerVersion&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;properties&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;profile&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;profiles&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependencies&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        ...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependencies&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;build&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;plugins&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 编译插件 --&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;plugin&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;maven-compiler-plugin&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;source&lt;/span&gt;&amp;gt;&lt;/span&gt;$&lt;span class=&quot;template-variable&quot;&gt;&amp;#123;java-version&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;source&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;target&lt;/span&gt;&amp;gt;&lt;/span&gt;$&lt;span class=&quot;template-variable&quot;&gt;&amp;#123;java-version&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;target&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;plugin&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 解决依赖jar包插件 --&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;plugin&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;maven-dependency-plugin&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;executions&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;execution&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;copy-dependencies&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;phase&lt;/span&gt;&amp;gt;&lt;/span&gt;package&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;phase&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;goals&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;goal&lt;/span&gt;&amp;gt;&lt;/span&gt;copy-dependencies&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;goal&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;goals&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                            &lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 将jar拷贝到lib目录 --&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;outputDirectory&lt;/span&gt;&amp;gt;&lt;/span&gt;$&lt;span class=&quot;template-variable&quot;&gt;&amp;#123;project.basedir&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;/lib&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;outputDirectory&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;overWriteReleases&lt;/span&gt;&amp;gt;&lt;/span&gt;false&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;overWriteReleases&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;overWriteSnapshots&lt;/span&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;overWriteSnapshots&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;execution&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;executions&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;plugin&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 打tgz包插件 --&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;plugin&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;maven-assembly-plugin&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;appendAssemblyId&lt;/span&gt;&amp;gt;&lt;/span&gt;false&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;appendAssemblyId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;finalName&lt;/span&gt;&amp;gt;&lt;/span&gt;$&lt;span class=&quot;template-variable&quot;&gt;&amp;#123;project.artifactId&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;-$&lt;/span&gt;&lt;span class=&quot;template-variable&quot;&gt;&amp;#123;maven.build.timestamp&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;finalName&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;descriptors&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;descriptor&lt;/span&gt;&amp;gt;&lt;/span&gt;src/main/assembly/assembly.xml&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;descriptor&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;descriptors&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;configuration&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;executions&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;execution&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;make-assembly&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;phase&lt;/span&gt;&amp;gt;&lt;/span&gt;package&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;phase&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;goals&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;goal&lt;/span&gt;&amp;gt;&lt;/span&gt;single&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;goal&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;goals&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;execution&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;executions&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;plugin&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;plugins&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;build&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;repositories&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 设置中央仓库 --&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;repository&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-snapshots&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;name&lt;/span&gt;&amp;gt;&lt;/span&gt;Spring Snapshots&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;name&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;url&lt;/span&gt;&amp;gt;&lt;/span&gt;https://repo.spring.io/libs-snapshot&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;url&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;snapshots&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;enabled&lt;/span&gt;&amp;gt;&lt;/span&gt;true&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;enabled&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;snapshots&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;repository&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;repositories&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;project&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;assembly.xml&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight dust&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;assembly&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;xmlns&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          &lt;span class=&quot;attr&quot;&gt;xmlns:xsi&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          &lt;span class=&quot;attr&quot;&gt;xsi:schemaLocation&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd&quot;&lt;/span&gt;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;distribution&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;formats&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;format&lt;/span&gt;&amp;gt;&lt;/span&gt;tgz&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;format&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;formats&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;fileSets&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;fileSet&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;directory&lt;/span&gt;&amp;gt;&lt;/span&gt;$&lt;span class=&quot;template-variable&quot;&gt;&amp;#123;project.basedir&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;directory&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;outputDirectory&lt;/span&gt;&amp;gt;&lt;/span&gt;/&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;outputDirectory&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;includes&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 需要打进tgz包的文件和目录 --&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;lib/**/*&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;bin/**/*&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;sql/**/*&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;etc/**/*&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;README*&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;includes&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;fileSet&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;fileSet&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;directory&lt;/span&gt;&amp;gt;&lt;/span&gt;$&lt;span class=&quot;template-variable&quot;&gt;&amp;#123;project.basedir&amp;#125;&lt;/span&gt;&lt;span class=&quot;xml&quot;&gt;/target/classes&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;directory&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;outputDirectory&lt;/span&gt;&amp;gt;&lt;/span&gt;/target/classes&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;outputDirectory&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;includes&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;**/*.class&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;include&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;includes&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;fileSet&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;fileSets&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;assembly&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;assembly的详细属性说明参考&lt;a href=&quot;http://maven.apache.org/plugins/maven-assembly-plugin/assembly.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://maven.apache.org/plugins/maven-assembly-plugin/assembly.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用命令&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;mvn clean package&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;可生成tgz包。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;###1. 可执行jar包&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;pom.xml&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;build&amp;gt;
+    &amp;lt;plugins&amp;gt;
+        &amp;lt;plugin&amp;gt;
+          
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>编译源代码安装node.js和gulp</title>
+    <link href="http://bysonline.github.io/2016/07/16/%E7%BC%96%E8%AF%91%E6%BA%90%E4%BB%A3%E7%A0%81%E5%AE%89%E8%A3%85node.js%E5%92%8Cgulp/"/>
+    <id>http://bysonline.github.io/2016/07/16/编译源代码安装node.js和gulp/</id>
+    <published>2016-07-16T07:53:39.000Z</published>
+    <updated>2016-07-18T05:11:59.476Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;1-下载最新版本源代码&quot;&gt;&lt;a href=&quot;#1-下载最新版本源代码&quot; class=&quot;headerlink&quot; title=&quot;1. 下载最新版本源代码&quot;&gt;&lt;/a&gt;1. 下载最新版本源代码&lt;/h3&gt;&lt;h3 id=&quot;2-解压安装&quot;&gt;&lt;a href=&quot;#2-解压安装&quot; class=&quot;headerlink&quot; title=&quot;2. 解压安装&quot;&gt;&lt;/a&gt;2. 解压安装&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;$ sudo cp ~/Downloads/node-v5.11.0.tar.gz /usr/local/src/
+$ cd node-v5.11.0
+$ sudo ./configure
+$ sudo make
+$ sudo make install
+$ node -v
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;3-安装gulp&quot;&gt;&lt;a href=&quot;#3-安装gulp&quot; class=&quot;headerlink&quot; title=&quot;3. 安装gulp&quot;&gt;&lt;/a&gt;3. 安装gulp&lt;/h3&gt;&lt;h4 id=&quot;3-1-全局安装gulp命令行工具&quot;&gt;&lt;a href=&quot;#3-1-全局安装gulp命令行工具&quot; class=&quot;headerlink&quot; title=&quot;3.1 全局安装gulp命令行工具&quot;&gt;&lt;/a&gt;3.1 全局安装gulp命令行工具&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;$ npm install -g gulp
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;3-2-项目下安装开发环境&quot;&gt;&lt;a href=&quot;#3-2-项目下安装开发环境&quot; class=&quot;headerlink&quot; title=&quot;3.2 项目下安装开发环境&quot;&gt;&lt;/a&gt;3.2 项目下安装开发环境&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;$ sudo npm install -save-dev gulp
+$ sudo npm install -g cnpm --registry=https://registry.npm.taobao.org
+$ sudo npm install
+$ gulp
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-下载最新版本源代码&quot;&gt;&lt;a href=&quot;#1-下载最新版本源代码&quot; class=&quot;headerlink&quot; title=&quot;1. 下载最新版本源代码&quot;&gt;&lt;/a&gt;1. 下载最新版本源代码&lt;/h3&gt;&lt;h3 id=&quot;2-解压安装&quot;&gt;&lt;a href=&quot;#2-解压安装&quot; c
+    
+    </summary>
+    
+      <category term="technology" scheme="http://bysonline.github.io/categories/technology/"/>
+    
+    
+      <category term="node.js" scheme="http://bysonline.github.io/tags/node-js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS 6.5 minimal安装</title>
+    <link href="http://bysonline.github.io/2016/07/16/CentOS%206.5%20minimal%E5%AE%89%E8%A3%85/"/>
+    <id>http://bysonline.github.io/2016/07/16/CentOS 6.5 minimal安装/</id>
+    <published>2016-07-16T07:53:37.000Z</published>
+    <updated>2016-07-16T15:11:34.817Z</updated>
+    
+    <content type="html">&lt;p&gt;###1. 安装eth0&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;vi /etc/sysconfig/network-scripts/ifcfg-eth0&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;ONBOOT=yes
+BOOTPROTO=static
+IPADDR=192.168.1.64
+GATEWAY=192.168.1.1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;###2. 创建用户和组&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;groupadd rolex&lt;br&gt;useradd -g rolex rolex&lt;br&gt;passwd rolex&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###3. 添加sudo权限&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;visudo&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;rolex    ALL=(ALL)    ALL
+rolex    ALL=NOPASSWD:    ALL
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;###4. 安装ftp&lt;/p&gt;
+&lt;p&gt;参考 &lt;strong&gt;CentOS 6.5 安装ftp.md&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;###5. 安装JDK&lt;/p&gt;
+&lt;p&gt;参考 &lt;strong&gt;CentOS 6.5 安装JDK.md&lt;/strong&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;###1. 安装eth0&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;vi /etc/sysconfig/network-scripts/ifcfg-eth0&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;ONBOOT=yes
+BOOTPROTO=static
+IP
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS 6.5 minimal安装ftp</title>
+    <link href="http://bysonline.github.io/2016/07/16/CentOS%206.5%20minimal%E5%AE%89%E8%A3%85ftp/"/>
+    <id>http://bysonline.github.io/2016/07/16/CentOS 6.5 minimal安装ftp/</id>
+    <published>2016-07-16T07:53:35.000Z</published>
+    <updated>2016-07-16T15:11:34.821Z</updated>
+    
+    <content type="html">&lt;p&gt;###1. 配置DNS&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;vi /etc/resolv.conf&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;nameserver 8.8.8.8
+nameserver 4.4.4.4
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;###2. 安装ftp&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;yum install vsftpd&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###3. 放开home路径权限&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;setsebool -P  ftp_home_dir  on&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###4. 虚拟机ftp配置&lt;/p&gt;
+&lt;p&gt;系统装完，可以ping通，但是ftp不通，错误消息如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;状态:      尝试连接“ECONNREFUSED - Connection refused by server”失败&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;google说可能是端口没开或占用&lt;/p&gt;
+&lt;p&gt;所以检查一下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#netstat -na --ip
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;21端口果然没有，打开ftp&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# service vsftpd start
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;再连ftp，错误消息如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;命令:      USER root&lt;br&gt;响应:      530 Permission denied.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;用的root用户，vsftp默认关闭root用户，所以打开root用户&lt;br&gt;修改文件 &lt;strong&gt;&lt;code&gt;/etc/vsftpd.ftpusers&lt;/code&gt;&lt;/strong&gt; 和 &lt;strong&gt;&lt;code&gt;/etc/vsftpd.user_list&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;响应: 553 Could not create file.&lt;br&gt;错误: 严重文件传输错误&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;执行命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;setsebool allow_ftpd_full_access 1
+setsebool allow_ftpd_use_cifs 1
+setsebool allow_ftpd_use_nfs 1
+setsebool ftp_home_dir 1
+setsebool httpd_enable_ftp_server 1
+setsebool tftp_anon_write 1
+service vsftpd restart
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;###5. vsftp上传文件限制&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;553 Could not create file.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;[root@node3 vsftpd]# /usr/sbin/setsebool -P ftp_home_dir 1
+[root@node3 vsftpd]# setsebool allow_ftpd_full_access 1
+[root@node3 vsftpd]# setsebool allow_ftpd_use_cifs 1
+[root@node3 vsftpd]# setsebool allow_ftpd_use_nfs 1
+[root@node3 vsftpd]# setsebool -P ftp_home_dir 1
+[root@node3 vsftpd]# setsebool httpd_enable_ftp_server 1
+[root@node3 vsftpd]# setsebool tftp_anon_write 1
+[root@node3 vsftpd]# service vsftpd restart
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;###1. 配置DNS&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;vi /etc/resolv.conf&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;nameserver 8.8.8.8
+nameserver 4.4.4.4
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;##
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS 6.5 安装JDK</title>
+    <link href="http://bysonline.github.io/2016/07/16/CentOS%206.5%20%E5%AE%89%E8%A3%85JDK/"/>
+    <id>http://bysonline.github.io/2016/07/16/CentOS 6.5 安装JDK/</id>
+    <published>2016-07-16T07:53:32.000Z</published>
+    <updated>2016-07-16T15:11:34.817Z</updated>
+    
+    <content type="html">&lt;p&gt;###1. 下载&lt;/p&gt;
+&lt;p&gt;####1.1 安装wget&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;yum install -y wget&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;####1.2 下载JDK&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;wget “&lt;a href=&quot;http://download.oracle.com/otn-pub/java/jdk/8u20-b26/jdk-8u20-linux-x64.tar.gz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.oracle.com/otn-pub/java/jdk/8u20-b26/jdk-8u20-linux-x64.tar.gz&lt;/a&gt;“&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###2. 解压&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tar -zxf jdk-8u20-linux-x64.tar.gz&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###3. 配置环境变量&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;echo “JAVA_HOME=/usr/java/jdk1.8.0_20” &amp;gt; /etc/profile.d/java.sh&lt;br&gt;echo ‘\$JAVA_HOME/bin:$PATH’ &amp;gt;&amp;gt; /etc/profile.d/java.sh&lt;br&gt;echo ‘export JAVA_HOME PATH’ &amp;gt;&amp;gt; /etc/profile.d/java.sh&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;###1. 下载&lt;/p&gt;
+&lt;p&gt;####1.1 安装wget&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;yum install -y wget&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;####1.2 下载JDK&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;wget “&lt;a hr
     
     </summary>
     

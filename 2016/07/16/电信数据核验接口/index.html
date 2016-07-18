@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>电信数据核验接口 | Bsyonline's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">电信数据核验接口</h1><a id="logo" href="/.">Bsyonline's blog</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/read/"><i class="fa fa-tags"> 阅读</i></a><a href="/guitar/"><i class="fa fa-music"> 吉他屋</i></a><a href="/categories/"><i class="fa fa-book"> 分类</i></a><a href="/tags/"><i class="fa fa-tags"> 标签</i></a><a href="/history/"><i class="fa fa-tags"> 历史</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">电信数据核验接口</h1><div class="post-meta">Jul 16, 2016<span> | </span><span class="category"><a href="/categories/technology/">technology</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span><span> | </span><span class="tag"><i class="fa fa-paperclip">&nbsp;</i><a href="/tags/chinadaas/">chinadaas</a></span></div><div class="clear"><div id="toc" class="toc-article"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#公共参数"><span class="toc-number">1.</span> <span class="toc-text">公共参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-电信数据身份核验"><span class="toc-number">2.</span> <span class="toc-text">1. 电信数据身份核验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-URL"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 URL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-请求参数"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 请求参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-响应参数"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 响应参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-响应示例"><span class="toc-number">2.4.</span> <span class="toc-text">1.4 响应示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-异常"><span class="toc-number">2.5.</span> <span class="toc-text">1.5 异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6-消息码描述"><span class="toc-number">2.6.</span> <span class="toc-text">1.6 消息码描述</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回消息代码解释"><span class="toc-number">3.</span> <span class="toc-text">返回消息代码解释</span></a></li></ol></div></div><div class="post-content"><p>信息核查是一系列查询api接口，以REST服务方式提供。用户按照指定规则开发接口程序或引入SDK后，可通过程序调用接口。使用前请先申请客户账号和令牌。令牌由客户保存，用于生成签名。为使该服务的使用者详细了解服务接口调用方法和规范，特编制此接口使用说明文档。</p>
+<h3 id="公共参数"><a href="#公共参数" class="headerlink" title="公共参数"></a>公共参数</h3><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>类型</th>
+<th>是否必需</th>
+<th>示例值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clientId</td>
+<td>string</td>
+<td>必须</td>
+<td>guest</td>
+<td>用户唯一标识</td>
+</tr>
+<tr>
+<td>signatrue</td>
+<td>string</td>
+<td>必须</td>
+<td>123</td>
+<td>用户请求的数据签名，由用户令牌，timestamp，nonce加密获得</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>string</td>
+<td>必须</td>
+<td>2016-07-05 13:42:10</td>
+<td>时间戳，服务器允许最大10分钟误差</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>string</td>
+<td>必须</td>
+<td>-1200534598</td>
+<td>随机数</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>可选</td>
+<td>xml</td>
+<td>默认为json</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-电信数据身份核验"><a href="#1-电信数据身份核验" class="headerlink" title="1. 电信数据身份核验"></a>1. 电信数据身份核验</h3><p>根据提供的手机号，姓名，身份证号，由系统针对信息的一致性进行核查，并返回结果。</p>
+<h4 id="1-1-URL"><a href="#1-1-URL" class="headerlink" title="1.1 URL"></a>1.1 URL</h4><p><a href="http://ip:port/drink/greenTea" target="_blank" rel="external">http://ip:port/drink/greenTea</a></p>
+<h4 id="1-2-请求参数"><a href="#1-2-请求参数" class="headerlink" title="1.2 请求参数"></a>1.2 请求参数</h4><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>类型</th>
+<th>是否必需</th>
+<th>示例值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>必须</td>
+<td>张三</td>
+<td>人员姓名</td>
+<td></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td>必须</td>
+<td>18610011001</td>
+<td>手机号码</td>
+</tr>
+<tr>
+<td>identity</td>
+<td>string</td>
+<td>必须</td>
+<td>210219197101011246</td>
+<td>身份证</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-3-响应参数"><a href="#1-3-响应参数" class="headerlink" title="1.3 响应参数"></a>1.3 响应参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>返回消息数据结构</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;├ errorCode</td>
+<td>string</td>
+<td>错误码，0表示成功</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;└ result</td>
+<td>Object</td>
+<td>核验结果数据结构</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ code</td>
+<td>string</td>
+<td>消息码</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ message</td>
+<td>string</td>
+<td>消息说明</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1-4-响应示例"><a href="#1-4-响应示例" class="headerlink" title="1.4 响应示例"></a>1.4 响应示例</h4><p><strong><em>xml</em></strong><br><figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> standalone=<span class="string">"yes"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">data</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">errorCode</span>&gt;</span>0<span class="tag">&lt;/<span class="name">errorCode</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">result</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">code</span>&gt;</span>2<span class="tag">&lt;/<span class="name">code</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">message</span>&gt;</span>核验不一致<span class="tag">&lt;/<span class="name">message</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">data</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><strong><em>json</em></strong><br><figure class="highlight json"><table><tr><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"errorCode"</span>: <span class="string">"0"</span>,</div><div class="line">    <span class="attr">"result"</span>:&#123;</div><div class="line">        <span class="attr">"code"</span>:<span class="string">"2"</span>,</div><div class="line">        <span class="attr">"message"</span>:<span class="string">"核验不一致"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="1-5-异常"><a href="#1-5-异常" class="headerlink" title="1.5 异常"></a>1.5 异常</h4><p><strong><em>xml</em></strong><br><figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span> standalone=<span class="string">"yes"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">data</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">errorCode</span>&gt;</span>9995<span class="tag">&lt;/<span class="name">errorCode</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">data</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><strong><em>json</em></strong><br><figure class="highlight json"><table><tr><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"errorCode"</span>: <span class="string">"9995"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="1-6-消息码描述"><a href="#1-6-消息码描述" class="headerlink" title="1.6 消息码描述"></a>1.6 消息码描述</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>代码值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>1</td>
+<td>一致</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2</td>
+<td>不一致</td>
+</tr>
+</tbody>
+</table>
+<h3 id="返回消息代码解释"><a href="#返回消息代码解释" class="headerlink" title="返回消息代码解释"></a>返回消息代码解释</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>代码值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>errorCode</td>
+<td>0</td>
+<td>成功</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>9999</td>
+<td>用户身份信息错误</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>9998</td>
+<td>账户状态异常</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>9997</td>
+<td>账户类型异常</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>9996</td>
+<td>没有订购该产品</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>9995</td>
+<td>没有查询权限</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>9994</td>
+<td>请求参数格式不正确</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>9993</td>
+<td>系统内部错误</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>9992</td>
+<td>请求过期</td>
+</tr>
+</tbody>
+</table>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://bysonline.github.io/2016/07/16/电信数据核验接口/" data-id="ciqru75cq004q7x0q8zljtw9l" class="article-share-link">分享到</a><div class="tags"><a href="/tags/chinadaas/">chinadaas</a></div><div class="post-nav"><a href="/2016/07/16/Client SDK (Java 版）/" class="pre">Client SDK (Java 版)</a><a href="/2016/07/16/zookeeper-3.4.6 安装/" class="next">zookeeper-3.4.6 安装</a></div></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><span class="category-list-count">39</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/hadoop/" style="font-size: 15px;">hadoop</a> <a href="/tags/elk/" style="font-size: 15px;">elk</a> <a href="/tags/gis/" style="font-size: 15px;">gis</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/elasticsearch/" style="font-size: 15px;">elasticsearch</a> <a href="/tags/fabric/" style="font-size: 15px;">fabric</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/chinadaas/" style="font-size: 15px;">chinadaas</a> <a href="/tags/jade/" style="font-size: 15px;">jade</a> <a href="/tags/spring-boot/" style="font-size: 15px;">spring-boot</a> <a href="/tags/spring-data/" style="font-size: 15px;">spring-data</a> <a href="/tags/javase/" style="font-size: 15px;">javase</a> <a href="/tags/vmware/" style="font-size: 15px;">vmware</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/blackberry/" style="font-size: 15px;">blackberry</a> <a href="/tags/thread/" style="font-size: 15px;">thread</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/18/jade语法实践/">jade语法实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/18/hbase 伪分布模式安装/">hbase 伪分布模式安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/Client SDK (Java 版）/">Client SDK (Java 版)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/电信数据核验接口/">电信数据核验接口</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/zookeeper-3.4.6 安装/">zookeeper-3.4.6 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/jQuery 常用操作操作/">jQuery常用操作操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/sqlplus执行文件/">sqlplus执行文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/spring boot 使用/">spring boot 使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/spring boot cache （redis）使用/">spring boot cache （redis）使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/spark standalone 安装/">spark standalone 安装</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">Bsyonline's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
