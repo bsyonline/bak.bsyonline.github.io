@@ -203,11 +203,11 @@ div {
     .post .disqus-comment-count:hover {
       color: #444; }
   .post .post-content {
+    padding-top: 10px;
     clear: left;
     font-size: 15px;
     line-height: 1.77;
     color: #444;
-    padding-top: 15px;
     text-align: justify;
     text-justify: distribute;
     word-break: normal; }
@@ -266,9 +266,11 @@ div {
         .post .post-content ul a:hover, .post .post-content ol a:hover {
           text-decoration: underline; }
   .post .tags {
-    padding-bottom: 1em; }
+    padding-bottom: 1em;
+    height: 3em; }
     .post .tags a {
-      margin-right: .5em; }
+      margin-right: .5em;
+      display: none; }
       .post .tags a:before {
         font-family: "FontAwesome";
         content: "\f0c6";
@@ -853,7 +855,6 @@ figure.highlight,
 .codeblock {
   background: #f7f8f8;
   margin: 10px 0;
-  line-height: 1.2em;
   color: #333;
   padding-top: 15px;
   overflow: hidden; }
@@ -913,7 +914,7 @@ figure.highlight,
       overflow-y: hidden; }
   figure.highlight .line,
   .codeblock .line {
-    height: 1.2em;
+    height: 2.1em;
     font-size: 13px; }
 
 .gist .line,
@@ -1385,24 +1386,20 @@ figure.highlight,
 
 /* toc*/
 .toc-article {
-  border: 1px solid #bbb;
-  border-radius: 7px;
-  margin: 1.1em 0 0 2em;
-  padding: 0.7em 0.7em 0 0.7em;
-  max-width: 40%; }
+  padding: 40px 0 0 0; }
 
 .toc-title {
   font-size: 120%; }
 
 #toc {
-  line-height: 1em;
-  float: right; }
+  line-height: 1em; }
   #toc .toc {
-    padding: 0;
-    margin: 0.5em;
+    padding: 20px;
     line-height: 1.8em; }
     #toc .toc li {
       list-style-type: none; }
+      #toc .toc li a .toc-number {
+        display: none; }
   #toc .toc-child {
     margin-left: 1em;
     padding-left: 0; }
@@ -1426,6 +1423,7 @@ table {
 
 /* article-share*/
 .article-share-link {
+  margin-top: 1em;
   cursor: pointer;
   float: right;
   margin-left: 20px; }

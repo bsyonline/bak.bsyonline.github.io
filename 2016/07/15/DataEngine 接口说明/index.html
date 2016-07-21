@@ -1,0 +1,616 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>dataengine框架结构 | Bsyonline's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">dataengine框架结构</h1><a id="logo" href="/.">Bsyonline's blog</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/read/"><i class="fa fa-tags"> 阅读</i></a><a href="/guitar/"><i class="fa fa-music"> 吉他屋</i></a><a href="/categories/"><i class="fa fa-book"> 分类</i></a><a href="/tags/"><i class="fa fa-tags"> 标签</i></a><a href="/history/"><i class="fa fa-tags"> 历史</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">dataengine框架结构</h1><div class="post-meta">Jul 15, 2016<span> | </span><span class="category"><a href="/categories/technology/">technology</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span><span> | </span><span class="tag"><i class="fa fa-paperclip">&nbsp;</i><a href="/tags/chinadaas/">chinadaas</a></span></div><div class="clear"><div id="toc" class="toc-article"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据流"><span class="toc-number">1.</span> <span class="toc-text">1. 数据流</span></a></li></ol></div></div><div class="post-content"><h3 id="1-数据流"><a href="#1-数据流" class="headerlink" title="1. 数据流"></a>1. 数据流</h3><p>hdfs到hbase</p>
+<pre><code>HDFS-&gt;HDFSDataProvider-&gt;*DataProvider-&gt;HbaseListener-&gt;hbase
+</code></pre><p>hbase到hbase</p>
+<pre><code>HBase-&gt;HBaseDataProvider-&gt;*DataProvider-&gt;HbaseListener-&gt;hbase
+</code></pre><p>部署<br>=</p>
+<p>####执行脚本<br>    data_loader.sh E_ENT_BASEINFO 20150510 hdfs://chinadaas11:8020/hive1/user/hive/warehouse/enterprisebaseinfocollect_20150510_compare/</p>
+<pre><code>data_loader.sh E_INV_INVESTMENT 20150510 hdfs://chinadaas11:8020/hive1/user/hive/warehouse/e_inv_investment_20150510_compare/
+
+data_loader.sh E_PRI_PERSON 20150510 hdfs://chinadaas11:8020/hive1/user/hive/warehouse/e_pri_person_20150510_compare/
+
+data_loader.sh E_GT_BASEINFO 20150510 hdfs://chinadaas11:8020/hive1/user/hive/warehouse/e_gt_baseinfo_20150510_compare/
+
+data_loader.sh E_GT_PERSON 20150510 hdfs://chinadaas11:8020/hive1/user/hive/warehouse/e_gt_person_20150510_compare/
+
+data_loader.sh DIS_SXBZXR 20150510 dis_sxbzxr_new_name
+
+data_loader.sh FROST 20150510 frost_pripid
+
+data_loader.sh IMPAWN 20150510 impawn_pripid
+
+data_loader.sh XZCF 20150510 xzcf_pripid
+</code></pre><p>http接口说明<br>=</p>
+<p>####1. CL:根据用户id查监控的变更企业列表</p>
+<p>#####1.1 接口说明<br>本接口用于获取用户监控名单中发生变更的企业列表。</p>
+<p>#####1.2 请求类型<br>GET</p>
+<p>#####1.3 输入参数<br>参数||说明<br>-|-|-<br>type||业务类型<br>params||<br>|uid|用户id<br>|form|起始记录<br>|to|结束记录</p>
+<blockquote>
+<p>业务类型参考附录1<br>起始from为0，to-from默认为10</p>
+</blockquote>
+<p>#####1.4 返回结果<br>参数|说明<br>-|-<br>uid|用户请求时携带的用户id<br>total|总记录数<br>begin|查询的起始记录<br>end|查询的结束记录<br>ents|用户监控名单中变更的企业的pripid列表</p>
+<blockquote>
+<p>返回结果为JSON格式</p>
+<p>#####1.5 示例<br>请求：</p>
+</blockquote>
+<pre><code>GET http://localhost:8080/datum/changes?
+{
+    &quot;type&quot;: &quot;cl&quot;,
+    &quot;params&quot;: {
+        &quot;uid&quot;: &quot;61301&quot;,
+        &quot;from&quot;: 1,
+        &quot;to&quot;: 4
+    }
+}
+</code></pre><p>响应：</p>
+<pre><code>{
+    &quot;uid&quot;: &quot;61301&quot;,
+    &quot;total&quot;: 84,
+    &quot;begin&quot;: 1,
+    &quot;end&quot;: 5,
+    &quot;ents&quot;: [
+        &quot;110000_17DBF8047B3244ADBFB8EDB2B964B9FA&quot;,
+        &quot;210000_0475ba9b-491b-415d-964b-4d6be6b88476&quot;,
+        &quot;210000_0a591f44-3030-4171-aa88-7fea64c5254c&quot;,
+        &quot;520000_5201005000023769&quot;
+    ]
+}
+</code></pre><p>####2. CD:根据用户id和企业pripid获取企业的变更详情</p>
+<p>#####2.1 接口说明<br>本接口用于获取用户监控名单中发生变更的企业列表。</p>
+<p>#####2.2 请求类型<br>GET</p>
+<p>#####2.3 输入参数<br>参数||说明<br>-|-|-<br>type||业务类型<br>params||参数<br>|uid|用户id<br>|pripid|企业pripid<br>|provider|查询的数据源类型</p>
+<blockquote>
+<p>数据源类型参考附录2</p>
+<p>#####2.4 返回结果<br>参数|说明<br>-|-<br>uid|用户请求时携带的用户id<br>ent|用户请求时携带的企业pripid<br>provider|用户请求时携带的数据源类型<br>changeItems|企业变更详情根节点<br>column|变更字段<br>oldValue|变更前值<br>newValue|变更后值<br>type|变更类型</p>
+<p>返回结果为JSON格式</p>
+</blockquote>
+<p>#####2.5 示例<br>请求：</p>
+<pre><code>GET http://localhost:8080/datum/changes?
+{
+    &quot;type&quot;: &quot;cd&quot;,
+    &quot;params&quot;: {
+        &quot;uid&quot;: &quot;61301&quot;,
+        &quot;pripid&quot;: &quot;210000_210200000022001120400213&quot;,
+        &quot;provider&quot;: &quot;A&quot;
+    }
+}
+</code></pre><p>响应：</p>
+<pre><code>{
+    &quot;uid&quot;: &quot;61301&quot;,
+    &quot;ent&quot;: &quot;210000_0475ba9b-491b-415d-964b-4d6be6b88476&quot;,
+    &quot;provider&quot;: &quot;A&quot;,
+    &quot;changeItems&quot;: [
+        {
+            &quot;column&quot;: &quot;INDUSTRYPHY&quot;,
+            &quot;newValue&quot;: &quot;H&quot;,
+            &quot;oldValue&quot;: &quot;F&quot;,
+            &quot;type&quot;: &quot;UPDATE&quot;
+        }
+    ]
+}
+</code></pre><p>####3. QO:根据订单id获取订单快照</p>
+<p>#####3.1 接口说明<br>本接口用于获取指定id的订单快照信息。</p>
+<p>#####3.2 请求类型<br>GET</p>
+<p>#####3.3 输入参数<br>参数|说明<br>-|-<br>order|订单id</p>
+<p>#####3.4 返回结果<br>参数|说明<br>-|-<br>orderId|用户请求时携带的订单id<br>info|订单信息</p>
+<blockquote>
+<p>返回结果为JSON格式</p>
+</blockquote>
+<p>#####3.5 示例<br>请求：</p>
+<pre><code>GET http://localhost:8080/datum/order/61301
+</code></pre><p>响应：</p>
+<pre><code>{
+    &quot;orderId&quot;: &quot;61301&quot;,
+    &quot;info&quot;: [
+        {
+        }
+    ]
+}
+</code></pre><p>####4. SO:保存订单快照</p>
+<p>#####4.1 接口说明<br>本接口用于保存订单快照信息。</p>
+<p>#####4.2 请求类型<br>POST</p>
+<p>#####4.3 输入参数<br>无</p>
+<p>#####4.4 返回结果<br>参数|说明<br>-|-<br>orderId|订单id<br>status|操作状态，0保存成功，1保存失败</p>
+<blockquote>
+<p>返回结果为JSON格式</p>
+</blockquote>
+<p>#####4.5 示例<br>请求：</p>
+<pre><code>POST http://localhost:8080/datum/order
+{
+    &quot;orderId&quot;: &quot;SDFYGTYYTUUUWQ&quot;,
+    &quot;snapshot&quot;: &quot;ORDER INFO&quot;
+}
+</code></pre><p>响应：</p>
+<pre><code>{
+    &quot;orderId&quot;: &quot;SDFYGTYYTUUUWQ&quot;,
+    &quot;status&quot;: 0
+}
+</code></pre><p>####5.CH:查询变更历史</p>
+<p>#####5.1 接口说明<br>本接口用于查询一段时间内监控企业的变更历史。</p>
+<p>#####5.2 请求类型<br>GET</p>
+<p>#####5.3 输入参数<br>参数||说明<br>-|-|-<br>type||业务类型<br>params||请求参数<br>|uid|用户id<br>|pripid|企业pripid<br>|startDate|开始日期<br>|endDate|结束日期</p>
+<p>#####5.4 返回结果<br>参数|||说明<br>-|-|-|<br>uid|||用户id<br>pripid|||企业pripid<br>history|||变更历史<br>|date||时间<br>|changeItem||变更项<br>||column|数据源类型<br>||type|变更类型<br>||oldValue|旧值<br>||newValue|新值</p>
+<blockquote>
+<p>返回结果为JSON格式</p>
+</blockquote>
+<p>#####5.5 示例<br>请求：</p>
+<pre><code>GET http://localhost:8080/datum/changes?
+{
+    &quot;type&quot;: &quot;ch&quot;,
+    &quot;params&quot;: {
+        &quot;uid&quot;: &quot;31834&quot;,
+        &quot;pripid&quot;: &quot;210000_210200000022002082100109&quot;,
+        &quot;startDate&quot;: &quot;20150101&quot;,
+        &quot;endDate&quot;: &quot;20160101&quot;
+    }
+}
+</code></pre><p>响应：</p>
+<pre><code>{
+    &quot;uid&quot;: &quot;31834&quot;,
+    &quot;pripid&quot;: &quot;210000_210200000022002082100109&quot;,
+    &quot;history&quot;: [
+        {
+            &quot;date&quot;: &quot;20151214&quot;,
+            &quot;changeItems&quot;: [
+                {
+                    &quot;column&quot;: &quot;S_EXT_SEQUENCE&quot;,
+                    &quot;newValue&quot;: &quot;210000201505072002331631&quot;,
+                    &quot;oldValue&quot;: &quot;210000201510092065303796&quot;,
+                    &quot;type&quot;: &quot;UPDATE&quot;
+                },
+                {
+                    &quot;column&quot;: &quot;S_EXT_TIMESTAMP&quot;,
+                    &quot;newValue&quot;: &quot;2015-05-07 06:57:34.0&quot;,
+                    &quot;oldValue&quot;: &quot;2015-10-09 05:38:08.0&quot;,
+                    &quot;type&quot;: &quot;UPDATE&quot;
+                },
+                {
+                    &quot;column&quot;: &quot;CERTYPE&quot;,
+                    &quot;newValue&quot;: &quot;!&quot;,
+                    &quot;oldValue&quot;: &quot;1&quot;,
+                    &quot;type&quot;: &quot;UPDATE&quot;
+                },
+                {
+                    &quot;column&quot;: &quot;ABUITEM&quot;,
+                    &quot;newValue&quot;: &quot;&quot;,
+                    &quot;oldValue&quot;: &quot;210213061&quot;,
+                    &quot;type&quot;: &quot;UPDATE&quot;
+                }
+            ]
+        }
+    ]
+}
+</code></pre><p>####6.QA:查询企业基本信息</p>
+<p>#####6.1 接口说明<br>本接口用于查询企业基本信息。</p>
+<p>#####6.2 请求类型<br>GET</p>
+<p>#####6.3 输入参数<br>参数||说明<br>-|-|-<br>type||业务类型<br>params||请求参数<br>|pripid|企业pripid</p>
+<p>#####6.4 返回结果<br>参数|说明<br>-|-<br>ENTNAME|企业名称<br>…|</p>
+<blockquote>
+<p>返回结果为JSON格式</p>
+</blockquote>
+<p>#####6.5 示例<br>请求：</p>
+<pre><code>GET http://localhost:8080/datum/query?
+{
+    &quot;type&quot;: &quot;qa&quot;,
+    &quot;params&quot;: {
+        &quot;pripid&quot;: &quot;210000_210200000022002082100109&quot;
+    }
+}
+</code></pre><p>响应：</p>
+<pre><code>{
+    &quot;version&quot;: 5,
+    &quot;minSize&quot;: 75,
+    &quot;S_EXT_NODENUM&quot;: &quot;&quot;,
+    &quot;PRIPID&quot;: &quot;&quot;,
+    &quot;S_EXT_SEQUENCE&quot;: &quot;&quot;,
+    &quot;ENTNAME&quot;: &quot;大连站商场&quot;,
+    &quot;ORIREGNO&quot;: &quot;&quot;,
+    &quot;REGNO&quot;: &quot;24129465&quot;,
+    &quot;ENTTYPE&quot;: &quot;3200&quot;,
+    &quot;PPRIPID&quot;: &quot;&quot;,
+    &quot;PENTNAME&quot;: &quot;&quot;,
+    &quot;PREGNO&quot;: &quot;&quot;,
+    &quot;HYPOTAXIS&quot;: &quot;&quot;,
+    &quot;INDUSTRYPHY&quot;: &quot;F&quot;,
+    &quot;INDUSTRYCO&quot;: &quot;5139&quot;,
+    &quot;ABUITEM&quot;: &quot;&quot;,
+    &quot;CBUITEM&quot;: &quot;&quot;,
+    &quot;OPFROM&quot;: &quot;1899-12-30&quot;,
+    &quot;OPTO&quot;: &quot;1899-12-30&quot;,
+    &quot;POSTALCODE&quot;: &quot;&quot;,
+    &quot;TEL&quot;: &quot;3631881-3157&quot;,
+    &quot;EMAIL&quot;: &quot;&quot;,
+    &quot;LOCALADM&quot;: &quot;210200&quot;,
+    &quot;CREDLEVEL&quot;: &quot;&quot;,
+    &quot;ASSDATE&quot;: &quot;1900-01-01&quot;,
+    &quot;ESDATE&quot;: &quot;1899-12-30&quot;,
+    &quot;APPRDATE&quot;: &quot;1899-12-30&quot;,
+    &quot;REGORG&quot;: &quot;210200&quot;,
+    &quot;ENTCAT&quot;: &quot;1&quot;,
+    &quot;ENTSTATUS&quot;: &quot;3&quot;,
+    &quot;REGCAP&quot;: &quot;10&quot;,
+    &quot;OPSCOPE&quot;: &quot;百货&quot;,
+    &quot;OPFORM&quot;: &quot;&quot;,
+    &quot;OPSCOANDFORM&quot;: &quot;&quot;,
+    &quot;PTBUSSCOPE&quot;: &quot;&quot;,
+    &quot;DOMDISTRICT&quot;: &quot;210202&quot;,
+    &quot;DOM&quot;: &quot;大连市中山区长江路２６１号&quot;,
+    &quot;ECOTECDEVZONE&quot;: &quot;&quot;,
+    &quot;DOMPRORIGHT&quot;: &quot;02&quot;,
+    &quot;OPLOCDISTRICT&quot;: &quot;&quot;,
+    &quot;OPLOC&quot;: &quot;&quot;,
+    &quot;RECCAP&quot;: &quot;0&quot;,
+    &quot;INSFORM&quot;: &quot;&quot;,
+    &quot;PARNUM&quot;: &quot;0&quot;,
+    &quot;PARFORM&quot;: &quot;&quot;,
+    &quot;EXENUM&quot;: &quot;0&quot;,
+    &quot;EMPNUM&quot;: &quot;0&quot;,
+    &quot;SCONFORM&quot;: &quot;&quot;,
+    &quot;FORCAPINDCODE&quot;: &quot;&quot;,
+    &quot;MIDPREINDCODE&quot;: &quot;&quot;,
+    &quot;PROTYPE&quot;: &quot;&quot;,
+    &quot;CONGRO&quot;: &quot;0&quot;,
+    &quot;CONGROCUR&quot;: &quot;&quot;,
+    &quot;CONGROUSD&quot;: &quot;0&quot;,
+    &quot;REGCAPUSD&quot;: &quot;0&quot;,
+    &quot;REGCAPCUR&quot;: &quot;&quot;,
+    &quot;REGCAPRMB&quot;: &quot;0&quot;,
+    &quot;FORREGCAPCUR&quot;: &quot;&quot;,
+    &quot;FORREGCAPUSD&quot;: &quot;0&quot;,
+    &quot;FORRECCAPUSD&quot;: &quot;0&quot;,
+    &quot;WORCAP&quot;: &quot;0&quot;,
+    &quot;CHAMECDATE&quot;: &quot;1900-01-01&quot;,
+    &quot;OPRACTTYPE&quot;: &quot;&quot;,
+    &quot;FORENTNAME&quot;: &quot;&quot;,
+    &quot;DEPINCHA&quot;: &quot;大连市公安局&quot;,
+    &quot;COUNTRY&quot;: &quot;&quot;,
+    &quot;ITEMOFOPORCPRO&quot;: &quot;&quot;,
+    &quot;CONOFCONTRPRO&quot;: &quot;&quot;,
+    &quot;FORDOM&quot;: &quot;&quot;,
+    &quot;FORREGECAP&quot;: &quot;0&quot;,
+    &quot;FOROPSCOPE&quot;: &quot;&quot;,
+    &quot;S_EXT_ENTPROPERTY&quot;: &quot;&quot;,
+    &quot;S_EXT_TIMESTAMP&quot;: &quot;2015-05-07 06:57:34.0&quot;,
+    &quot;S_EXT_BATCH&quot;: &quot;&quot;,
+    &quot;S_EXT_VALIDFLAG&quot;: &quot;1&quot;,
+    &quot;S_EXT_INDUSCAT&quot;: &quot;3&quot;,
+    &quot;S_EXT_ENTTYPE&quot;: &quot;A02&quot;,
+    &quot;MANACATE&quot;: &quot;&quot;,
+    &quot;LIMPARNUM&quot;: &quot;0&quot;,
+    &quot;FOREIGNBODYTYPE&quot;: &quot;&quot;,
+    &quot;ENTNAME_OLD&quot;: &quot;大连站商场&quot;,
+    &quot;PERSON_ID&quot;: &quot;&quot;,
+    &quot;NAME&quot;: &quot;刘玉芳&quot;,
+    &quot;CERTYPE&quot;: &quot;!&quot;,
+    &quot;CERNO&quot;: &quot;&quot;,
+    &quot;ANCHEYEAR&quot;: &quot;\\N&quot;,
+    &quot;CANDATE&quot;: &quot;1996-10-11&quot;,
+    &quot;REVDATE&quot;: &quot;\\N&quot;,
+    &quot;RECORD_STAT&quot;: &quot;0&quot;,
+    &quot;RECORD_DESC&quot;: &quot;&quot;,
+    &quot;ORGCODES&quot;: &quot;&quot;,
+    &quot;CREDITCODE&quot;: &quot;&quot;
+}
+</code></pre><p>####7.CA:按地区统计变更企业数量</p>
+<p>#####7.1 接口说明<br>本接口用于按统计每个地区某一批次数据的变更企业数量。</p>
+<p>#####7.2 请求类型<br>GET</p>
+<p>#####7.3 输入参数<br>参数||说明<br>-|-|-<br>type||业务类型<br>params||请求参数<br>|uid|用户id<br>|date|批次</p>
+<p>#####7.4 返回结果<br>参数|说明<br>-|-<br>uid|用户id<br>date|批次<br>data|<k,v>，k为地区代码，v为企业变更量</k,v></p>
+<blockquote>
+<p>返回结果为JSON格式</p>
+</blockquote>
+<p>#####7.5 示例<br>请求：</p>
+<pre><code>GET http://localhost:8080/datum/countup?
+{
+    &quot;type&quot;: &quot;ca&quot;,
+    &quot;params&quot;: {
+        &quot;uid&quot;: &quot;61301&quot;,
+        &quot;date&quot;: &quot;20151214&quot;
+    }
+}
+</code></pre><p>响应：</p>
+<pre><code>{
+    &quot;uid&quot;: &quot;61301&quot;,
+    &quot;date&quot;: &quot;20151214&quot;,
+    &quot;data&quot;: {
+        &quot;210000&quot;: 490
+    }
+}
+</code></pre><p>####8.CC:统计变更量</p>
+<p>#####8.1 接口说明<br>本接口用于按统计某一批次数据的用户监控企业的字段变更量。</p>
+<p>#####8.2 请求类型<br>GET</p>
+<p>#####8.3 输入参数<br>参数||说明<br>-|-|-<br>type||业务类型<br>params||请求参数<br>|uid|用户id<br>|date|批次</p>
+<p>#####8.4 返回结果<br>参数|说明<br>-|-<br>uid|用户id<br>date|批次<br>count|字段变更量</p>
+<blockquote>
+<p>返回结果为JSON格式</p>
+</blockquote>
+<p>#####8.5 示例<br>请求：</p>
+<pre><code>GET http://localhost:8080/datum/countup?
+{
+    &quot;type&quot;: &quot;cc&quot;,
+    &quot;params&quot;: {
+        &quot;uid&quot;: &quot;61301&quot;,
+        &quot;date&quot;: &quot;20151214&quot;
+    }
+}
+</code></pre><p>响应：</p>
+<pre><code>{
+    &quot;uid&quot;: &quot;61301&quot;,
+    &quot;date&quot;: &quot;20151214&quot;,
+    &quot;count&quot;: 4486
+}
+</code></pre><p>####9.CI:按指标统计企业变更数量</p>
+<p>#####9.1 接口说明<br>本接口用于按统计某一批次数据的某些指标变更的企业。</p>
+<p>#####9.2 请求类型<br>GET</p>
+<p>#####9.3 输入参数<br>参数||说明<br>-|-|-<br>type||业务类型<br>params||请求参数<br>|uid|用户id<br>|date|批次</p>
+<p>#####9.4 返回结果<br>参数|说明<br>-|-<br>uid|用户id<br>date|批次<br>count|企业变更数量<br>ents|数组，企业pirpid</p>
+<blockquote>
+<p>返回结果为JSON格式</p>
+</blockquote>
+<p>#####9.5 示例<br>请求：</p>
+<pre><code>GET http://localhost:8080/datum/countup?
+{
+    &quot;type&quot;: &quot;ci&quot;,
+    &quot;params&quot;: {
+        &quot;uid&quot;: &quot;61301&quot;,
+        &quot;date&quot;: &quot;20151214&quot;,
+        &quot;indicators&quot;: [
+            &quot;ABUITEM&quot;,
+            &quot;REGORG&quot;
+        ]
+    }
+}
+</code></pre><p>响应：</p>
+<pre><code>{
+    &quot;uid&quot;: &quot;61301&quot;,
+    &quot;date&quot;: &quot;20151214&quot;,
+    &quot;count&quot;: 38,
+    &quot;ents&quot;: [
+        &quot;210000_21021100001200103070022X&quot;,
+        &quot;210000_210283000022012011800252&quot;,
+        ...
+    ]
+}
+</code></pre><p>####10. SE:检索</p>
+<p>#####10.1 接口说明<br>本接口用于提供模糊检索。查询字段为：名称，注册号、组织机构代码，统一社会信用代码。<br>命中规则：wd为检索关键字，名称中包含wd或注册号、组织机构代码、统计社会信用代码以wd开头的记录为命中。</p>
+<p>#####10.2 请求类型<br>GET</p>
+<p>#####10.3 输入参数<br>参数|说明<br>-|-<br>wd|检索的关键字</p>
+<p>#####10.4 返回结果<br>参数||说明<br>-|-|<br>wd||检索的关键字<br>results||检索结果<br>|score|评分<br>|pripid|主体id<br>|ename|主体名称<br>|regNo|注册号<br>|orgCode|组织机构代码<br>|creditCode|统一社会信用代码</p>
+<blockquote>
+<p>返回结果为JSON格式</p>
+</blockquote>
+<p>#####10.5 示例<br>请求：</p>
+<pre><code>GET http://localhost:8080/datum/search?wd=辽宁
+</code></pre><p>响应：</p>
+<pre><code>{
+    &quot;wd&quot;: &quot;辽宁&quot;,
+    &quot;results&quot;: [
+        {
+            &quot;score&quot;: 0.13453172,
+            &quot;pripid&quot;: &quot;210000_210202000011998102800195&quot;,
+            &quot;ename&quot;: &quot;辽宁书画院&quot;,
+            &quot;regNo&quot;: &quot;210202000022199&quot;,
+            &quot;orgCode&quot;: &quot;&quot;,
+            &quot;creditCode&quot;: &quot;&quot;
+        },
+        {
+            &quot;score&quot;: 0.13453172,
+            &quot;pripid&quot;: &quot;210000_210282000011980120100222&quot;,
+            &quot;ename&quot;: &quot;辽宁盐业机械厂&quot;,
+            &quot;regNo&quot;: &quot;11873106&quot;,
+            &quot;orgCode&quot;: &quot;&quot;,
+            &quot;creditCode&quot;: &quot;&quot;
+        },
+        {
+            &quot;score&quot;: 0.13453172,
+            &quot;pripid&quot;: &quot;210000_210202000011961030100026&quot;,
+            &quot;ename&quot;: &quot;辽宁电位器厂&quot;,
+            &quot;regNo&quot;: &quot;2102021100676&quot;,
+            &quot;orgCode&quot;: &quot;&quot;,
+            &quot;creditCode&quot;: &quot;&quot;
+        },
+        {
+            &quot;score&quot;: 0.13453172,
+            &quot;pripid&quot;: &quot;210000_21020200001199308260074X&quot;,
+            &quot;ename&quot;: &quot;辽宁万宁国际运输公司&quot;,
+            &quot;regNo&quot;: &quot;2102021105329&quot;,
+            &quot;orgCode&quot;: &quot;&quot;,
+            &quot;creditCode&quot;: &quot;&quot;
+        },
+        {
+            &quot;score&quot;: 0.13453172,
+            &quot;pripid&quot;: &quot;210000_210211000011900010101767&quot;,
+            &quot;ename&quot;: &quot;辽宁无线电二厂&quot;,
+            &quot;regNo&quot;: &quot;11857934&quot;,
+            &quot;orgCode&quot;: &quot;&quot;,
+            &quot;creditCode&quot;: &quot;&quot;
+        }
+    ]
+}
+</code></pre><p>remote接口说明<br>=</p>
+<p>####1. 使用方法<br>实例化com.daas.data.business.RemoteBusiness</p>
+<pre><code>RemoteBusiness remoteBusiness = SpringUtil.getAc().getBean(RemoteBusiness.class);
+</code></pre><p>####2. 方法说明</p>
+<p>#####2.1 查询变更列表<br>    public Changes findChanges(String uid, int from, int to);</p>
+<p>#####2.2 查询变更明细<br>    public ChangeDetails findDetails(String uid, String pripid, String provider);</p>
+<p>#####2.3 查企业基本信息<br>    public EntInfo findEntInfo(String pripid);</p>
+<p>#####2.4 抓取订单快照<br>    public Order fetch(String orderId);</p>
+<p>#####2.5 保存订单快照<br>    public Order save(String orderId, String snapshot);</p>
+<p>#####2.6 查询一段时间企业变更历史<br>    public History changeHistory(String uid, String pripid, String startDate, String endDate);</p>
+<p>#####2.7 统计某批次用户监控企业的字段变更量（按变更字段统计，有一项变更计算一次）<br>    public CountUp countUpByChangeItem(String uid, String date);</p>
+<p>#####2.8 指标统计<br>    public CountUp countUpByIndicator(String uid, String date, String… indicator);</p>
+<p>#####2.9 按地区统计变更企业数量<br>    public CountUp countUpByArea(String uid, String date);</p>
+<p>#####附录1：业务类型</p>
+<table>
+<thead>
+<tr>
+<th>业务名称</th>
+<th>类型</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查询基本信息</td>
+<td>query</td>
+</tr>
+<tr>
+<td>查询企业基本信息</td>
+<td></td>
+<td>qa</td>
+</tr>
+<tr>
+<td>查询法人信息</td>
+<td></td>
+<td>qp</td>
+</tr>
+<tr>
+<td>查询对外投资信息</td>
+<td></td>
+<td>qi</td>
+</tr>
+<tr>
+<td>查询个体工商户信息</td>
+<td></td>
+<td>qb</td>
+</tr>
+<tr>
+<td>查询个体经营者信息</td>
+<td></td>
+<td>qg</td>
+</tr>
+<tr>
+<td>查询订单快照</td>
+<td></td>
+<td>qo</td>
+</tr>
+<tr>
+<td>查询变更</td>
+<td>changes</td>
+<td></td>
+</tr>
+<tr>
+<td>查询变更列表</td>
+<td></td>
+<td>cl</td>
+</tr>
+<tr>
+<td>查询变更详情</td>
+<td></td>
+<td>cd</td>
+</tr>
+<tr>
+<td>查询变更历史</td>
+<td></td>
+<td>ch</td>
+</tr>
+<tr>
+<td>保存</td>
+<td>save</td>
+</tr>
+<tr>
+<td>保存订单快照</td>
+<td></td>
+<td>so</td>
+</tr>
+<tr>
+<td>统计</td>
+<td>countup</td>
+<td></td>
+</tr>
+<tr>
+<td>按地区统计</td>
+<td></td>
+<td>ca</td>
+</tr>
+<tr>
+<td>按指标统计</td>
+<td></td>
+<td>ci</td>
+</tr>
+<tr>
+<td>统计变更量</td>
+<td></td>
+<td>cc</td>
+</tr>
+<tr>
+<td>检索</td>
+<td>search</td>
+<td>se</td>
+</tr>
+</tbody>
+</table>
+<p>#####附录2：数据源类型<br>数据源名称|英文|代码<br>-|-|-<br>企业基本信息|E_ENT_BASEINFO|A<br>主要人员信息|E_PRI_PERSON|B<br>对外投资|E_INV_INVESTMENT|C<br>个体工商户基本信息|E_GT_BASEINFO|D<br>个体经营者基本信息|E_GT_PERSON|E<br>股权冻结|FROST|G<br>股权出质|IMPAWN|H<br>行政处罚|XZCF|I<br>失信被执行人|DIS_SXBZXR|J<br>变更推送|PUSH_CHANGE|F</p>
+<p>#####附录3：表</p>
+<table>
+<thead>
+<tr>
+<th>表名</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>meta</td>
+<td>元数据表</td>
+</tr>
+<tr>
+<td>m_gs_change</td>
+<td>工商数据变更汇总表</td>
+</tr>
+<tr>
+<td>m_non_gs_change</td>
+<td>非工商数据变更汇总表</td>
+</tr>
+<tr>
+<td>p_change</td>
+<td>变更推送表</td>
+</tr>
+<tr>
+<td>xzcf_pripid</td>
+<td>行政处罚索引表</td>
+</tr>
+<tr>
+<td>xzcf</td>
+<td>行政处罚数据表</td>
+</tr>
+<tr>
+<td>frost_pripid</td>
+<td>股权冻结索引表</td>
+</tr>
+<tr>
+<td>frost</td>
+<td>股权冻结数据表</td>
+</tr>
+<tr>
+<td>impawn_pripid</td>
+<td>股权出质索引表</td>
+</tr>
+<tr>
+<td>impawn</td>
+<td>股权出质数据表</td>
+</tr>
+<tr>
+<td>dis_sxbzxr_new_name</td>
+<td>失信被执行人索引表</td>
+</tr>
+<tr>
+<td>ENTERPRISEBASEINFOCOLLECT<em>ENTNAME</em>$DATE</td>
+<td>失信被执行人字典表</td>
+</tr>
+<tr>
+<td>dis_sxbzxr_new</td>
+<td>失信被执行人数据表</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://bysonline.github.io/2016/07/15/DataEngine 接口说明/" data-id="ciqw5f4tl001lua0qspcr3p44" class="article-share-link">分享到</a><div class="tags"><a href="/tags/chinadaas/">chinadaas</a></div><div class="post-nav"><a href="/2016/07/15/IDEA + Maven + Jetty 热部署/" class="pre">IDEA + Maven + Jetty 热部署</a><a href="/2016/07/15/制作 docker 镜像：创建 tomcat 镜像/" class="next">制作docker镜像：创建tomcat镜像</a></div></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/chinadaas/">chinadaas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><span class="category-list-count">33</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a><span class="category-list-count">1</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/gulp/" style="font-size: 15px;">gulp</a> <a href="/tags/hadoop/" style="font-size: 15px;">hadoop</a> <a href="/tags/gis/" style="font-size: 15px;">gis</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/elk/" style="font-size: 15px;">elk</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/elasticsearch/" style="font-size: 15px;">elasticsearch</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/fabric/" style="font-size: 15px;">fabric</a> <a href="/tags/chinadaas/" style="font-size: 15px;">chinadaas</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/jade/" style="font-size: 15px;">jade</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/spring-data/" style="font-size: 15px;">spring-data</a> <a href="/tags/spring-boot/" style="font-size: 15px;">spring-boot</a> <a href="/tags/javase/" style="font-size: 15px;">javase</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/vmware/" style="font-size: 15px;">vmware</a> <a href="/tags/thread/" style="font-size: 15px;">thread</a> <a href="/tags/blackberry/" style="font-size: 15px;">blackberry</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/20/gulp 环境安装/">gulp 环境安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/ant 环境安装/">Ant 环境安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/Ant 环境安装/">ant 环境安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/我的hexo我做主/">我的hexo我做主</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/18/jade 语法实践/">jade 语法实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/Client SDK (Java 版）/">Client SDK (Java 版)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/电信数据核验接口/">电信数据核验接口</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/zookeeper-3.4.6 安装/">zookeeper-3.4.6 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/jQuery 常用操作操作/">jQuery常用操作操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/sqlplus 执行文件/">sqlplus执行文件</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">Bsyonline's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
