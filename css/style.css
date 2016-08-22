@@ -1410,14 +1410,15 @@ table {
   width: 100%;
   background: transparent;
   border-collapse: collapse;
-  border-spacing: 0;
+  border-spacing: 1px;
   text-align: left; }
   table th {
     font-weight: bold;
     padding: 5px 10px;
-    border-bottom: 2px solid #909ba2; }
+    border: 1px solid #909ba2; }
   table td {
-    padding: 5px 10px; }
+    padding: 5px 10px;
+    border: 1px solid #909ba2; }
   table tr:nth-child(2n) {
     background: #f7f8f8; }
 
