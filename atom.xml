@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Bsyonline&#39;s blog</title>
-  
+  <title>比不写强</title>
+  <subtitle>Java 编程相关</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bysonline.github.io/"/>
