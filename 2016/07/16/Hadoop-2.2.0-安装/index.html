@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>hadoop 2.2.0 安装 | Bsyonline's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">hadoop 2.2.0 安装</h1><a id="logo" href="/.">Bsyonline's blog</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/read/"><i class="fa fa-tags"> 阅读</i></a><a href="/guitar/"><i class="fa fa-music"> 吉他屋</i></a><a href="/tags/"><i class="fa fa-tags"> 标签</i></a><a href="/history/"><i class="fa fa-tags"> 历史</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">hadoop 2.2.0 安装</h1><div class="post-meta">Jul 16, 2016<span> | </span><span class="category"><a href="/categories/编程/">编程</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span><span> | </span><span class="tag"><i class="fa fa-paperclip">&nbsp;</i><a href="/tags/hadoop/">hadoop</a></span></div><div class="clear"><div id="toc" class="toc-article"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-下载"><span class="toc-number">1.</span> <span class="toc-text">1. 下载</span></a></li></ol></div></div><div class="post-content"><h3 id="1-下载"><a href="#1-下载" class="headerlink" title="1. 下载"></a>1. 下载</h3><p><a href="https://archive.apache.org/dist/hadoop/common/hadoop-2.2.0/hadoop-2.2.0.tar.gz" title="hadoop-2.2.0" target="_blank" rel="external">https://archive.apache.org/dist/hadoop/common/hadoop-2.2.0/hadoop-2.2.0.tar.gz</a></p>
+<p>###2. 解压</p>
+<blockquote>
+<p>tar -zxf hadoop-2.2.0.tar.gz</p>
+<p>###3. 配置环境变量<br>HADOOP_HOME=/usr/hadoop/hadoop-2.2.0<br>配置文件路径 $HADOOP_HOME/etc/hadoop</p>
+<p>###4. 修改配置文件</p>
+<p>####4.1 修改core-site.xml</p>
+<p>vi ./etc/hadoop/core-site.xml</p>
+</blockquote>
+<pre><code>&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.defaultFS&lt;/name&gt;
+        &lt;value&gt;hdfs://node1:8020&lt;/value&gt;`  
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+        &lt;value&gt;/home/tmp/hadoop2.0&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;io.file.buffer.size&lt;/name&gt;
+        &lt;value&gt;131072&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><p>####4.2 修改 hdfs-site.xml</p>
+<blockquote>
+<p>vi ./etc/hadoop/hdfs-site.xml</p>
+</blockquote>
+<pre><code>&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+            &lt;value&gt;1&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+        &lt;value&gt;/usr/hadoop/hadoop-2.2.0/name&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+        &lt;value&gt;/usr/hadoop/hadoop-2.2.0/data&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.permissions&lt;/name&gt;
+        &lt;value&gt;false&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><p>####4.3 修改 mapred-site.xml</p>
+<blockquote>
+<p>vi ./etc/hadoop/mapred-site.xml</p>
+</blockquote>
+<pre><code>&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+        &lt;value&gt;yarn&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><p>####4.4 修改 yarn-site.xml</p>
+<blockquote>
+<p>vi ./etc/hadoop/yarn-site.xml</p>
+</blockquote>
+<pre><code>&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt;
+        &lt;value&gt;node1:8032&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.scheduler.address&lt;/name&gt;
+        &lt;value&gt;node1:8030&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.resource-tracker.address&lt;/name&gt;
+        &lt;value&gt;node1:8031&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.admin.address&lt;/name&gt;
+        &lt;value&gt;node1:8033&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.webapp.address&lt;/name&gt;
+        &lt;value&gt;node1:8088&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.scheduler.class&lt;/name&gt;
+        &lt;value&gt;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.nodemanager.aux-services.mapreduce.shuffle.class&lt;/name&gt;
+        &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><p>###5. 设置互信</p>
+<p>####5.1 生成ssh key</p>
+<blockquote>
+<p>ssh-keygen -t dsa -P ‘’ -f ~/.ssh/id_dsa<br>cat ~/.ssh/id_dsa.pub &gt;&gt; ~/.ssh/authorized_keys<br>chmod 0600 ~/.ssh/authorized_keys</p>
+</blockquote>
+<p>####5.2 测试ssh</p>
+<blockquote>
+<p>ssh localhost</p>
+<p>###6. 格式化namenode</p>
+<p>./bin/hdfs namenode -format</p>
+</blockquote>
+<p>###7. 启动namenode和datanode</p>
+<blockquote>
+<p>./sbin/hadoop-daemon.sh start namenode<br>./sbin/hadoop-daemon.sh start datanode<br>./sbin/yarn-daemon.sh start resourcemanager<br>./sbin/yarn-daemon.sh start nodemanager<br>./sbin/yarn-daemon.sh start proxyserver<br>./sbin/mr-jobhistory-daemon.sh start historyserver</p>
+</blockquote>
+<p>####8. 验证</p>
+<blockquote>
+<p>./bin/hdfs dfs -mkdir /user/rolex/input/<br>./bin/hdfs dfs -put ../README.txt /user/rolex/input/<br>./bin/hadoop jar ../share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar grep /user/rolex/input/README.txt /user/rolex/output/ ‘code’<br>./bin/hdfs dfs -cat /user/rolex/output/part-r-00000</p>
+</blockquote>
+<p>####9. 关闭</p>
+<blockquote>
+<p>./sbin/hadoop-daemon.sh stop namenode<br>./sbin/hadoop-daemon.sh stop datanode<br>./sbin/yarn-daemon.sh stop resourcemanager<br>./sbin/yarn-daemon.sh stop nodemanager<br>./sbin/yarn-daemon.sh stop proxyserver<br>./sbin/mr-jobhistory-daemon.sh stop historyserver  </p>
+</blockquote>
+</div><script type="text/javascript" src="/js/share.js?v=1.0.0" async></script><a data-url="http://bysonline.github.io/2016/07/16/Hadoop-2.2.0-安装/" data-id="cit1axlgu001myw0qnmoeh0oi" class="article-share-link">分享到</a><div class="tags"><a href="/tags/hadoop/">hadoop</a></div><div class="post-nav"><a href="/2016/07/16/Google-地图求两点之间距离/" class="pre">Google地图求两点之间距离</a><a href="/2016/07/16/Hadoop-练习/" class="next">hadoop练习</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Elasticsearch/">Elasticsearch</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/chinadaas/">chinadaas</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a><span class="category-list-count">90</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Maven/" style="font-size: 15px;">Maven</a> <a href="/tags/blackberry/" style="font-size: 15px;">blackberry</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/chinadaas/" style="font-size: 15px;">chinadaas</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/ELK/" style="font-size: 15px;">ELK</a> <a href="/tags/Elasticsearch/" style="font-size: 15px;">Elasticsearch</a> <a href="/tags/fabric/" style="font-size: 15px;">fabric</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/gis/" style="font-size: 15px;">gis</a> <a href="/tags/gulp/" style="font-size: 15px;">gulp</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/hbase/" style="font-size: 15px;">hbase</a> <a href="/tags/hive/" style="font-size: 15px;">hive</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/IDEA/" style="font-size: 15px;">IDEA</a> <a href="/tags/idea/" style="font-size: 15px;">idea</a> <a href="/tags/Jade/" style="font-size: 15px;">Jade</a> <a href="/tags/Jmeter/" style="font-size: 15px;">Jmeter</a> <a href="/tags/hadoop/" style="font-size: 15px;">hadoop</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Nexus/" style="font-size: 15px;">Nexus</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/Oracle/" style="font-size: 15px;">Oracle</a> <a href="/tags/Scala/" style="font-size: 15px;">Scala</a> <a href="/tags/Spark/" style="font-size: 15px;">Spark</a> <a href="/tags/spring-boot/" style="font-size: 15px;">spring-boot</a> <a href="/tags/spring-data/" style="font-size: 15px;">spring-data</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/Zookeeper/" style="font-size: 15px;">Zookeeper</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/Thread/" style="font-size: 15px;">Thread</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a> <a href="/tags/elk/" style="font-size: 15px;">elk</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/vmware/" style="font-size: 15px;">vmware</a> <a href="/tags/Javase/" style="font-size: 15px;">Javase</a> <a href="/tags/Hadoop/" style="font-size: 15px;">Hadoop</a> <a href="/tags/面试/" style="font-size: 15px;">面试</a> <a href="/tags/Jaxb-Java/" style="font-size: 15px;">Jaxb Java</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/13/Linux-定时任务-crontab-命令详解/">Linux 定时任务 crontab 命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/08/风铃企业查询api接口/">风铃企业查询api接口</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/08/MySQL-备份与还原/">MySQL 备份与还原</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/07/Jmeter-使用入门/">Jmeter 使用入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/05/Scala-学习资料汇总/">Scala 学习资料汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/19/Java-Stream-详解/">Java Stream 详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/19/Java-反射/">Java 反射</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/16/多线程拾遗/">多线程拾遗</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/09/HashMap-的工作原理/">HashMap 的工作原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/Java-中的回调函数/">Java 中的回调函数</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-4-4"><div id="footer">© <a href="/." rel="nofollow">Bsyonline's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="/js/search.js?v=1.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>
